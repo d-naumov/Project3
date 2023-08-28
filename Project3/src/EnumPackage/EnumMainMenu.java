@@ -6,6 +6,7 @@ public enum EnumMainMenu {
   UNEXPECTED(""),
   FIGHTING("Сражение"),
   SHOP("Магазин"),
+  INFORMATION("Информация о персонаже"),
   EXIT("Выход");
   private final String message;
 
@@ -32,6 +33,8 @@ public enum EnumMainMenu {
       case "2":
         return SHOP;
       case "3":
+        return INFORMATION;
+      case "4":
         return EXIT;
       default:
         return UNEXPECTED;
