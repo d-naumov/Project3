@@ -2,14 +2,14 @@ package EnumPackage;
 
 import java.util.Scanner;
 
-public enum MainMenu {
+public enum EnumMainMenu {
   UNEXPECTED(""),
   FIGHTING("Сражение"),
   SHOP("Магазин"),
   EXIT("Выход");
   private final String message;
 
-  MainMenu(String message) {
+  EnumMainMenu(String message) {
     this.message = message;
   }
 
@@ -18,7 +18,7 @@ public enum MainMenu {
   }
 
 
-  public static MainMenu readCommand(Scanner scanner) {
+  public static EnumMainMenu readCommand(Scanner scanner) {
     printMenu();
     System.out.println("Введите команду");
     if (!scanner.hasNext()) {
@@ -42,7 +42,7 @@ public enum MainMenu {
    * Метод выводит меню в консоль
    */
   public static void printMenu() {
-    for (MainMenu menu : values()) {
+    for (EnumMainMenu menu : values()) {
       if (!menu.message.isEmpty()) {
         System.out.println(menu.ordinal() + "." + menu.message);
       }

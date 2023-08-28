@@ -1,4 +1,6 @@
-import EnumPackage.MainMenu;
+import EnumPackage.EnumMainMenu;
+import EnumPackage.Fighting;
+import EnumPackage.Shop;
 import java.util.Scanner;
 
 public class Main {
@@ -6,12 +8,14 @@ public class Main {
     Scanner scanner = new Scanner(System.in);
 
     while (true) {
-      MainMenu menu = MainMenu.readCommand(scanner);
+      EnumMainMenu menu = EnumMainMenu.readCommand(scanner);
 
       switch (menu) {
         case FIGHTING:
+          Fighting.readCommand(scanner);
           break;
         case SHOP:
+          Shop.readCommand(scanner);
           break;
         case EXIT:
 
@@ -21,6 +25,4 @@ public class Main {
       }
     }
   }
-
-
 }
