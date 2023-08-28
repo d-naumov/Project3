@@ -2,13 +2,13 @@ package EnumPackage;
 
 import java.util.Scanner;
 
-public enum Shop {
+public enum EnumShop {
   UNEXPECTED(""),
   SELECTION("Выбор товара"),
   EXIT("Выход");
   private final String message;
 
-  Shop(String message) {
+  EnumShop(String message) {
     this.message = message;
   }
 
@@ -16,7 +16,7 @@ public enum Shop {
     return message;
   }
 
-  public static Shop readCommand(Scanner scanner) {
+  public static EnumShop readCommand(Scanner scanner) {
     printMenu();
     System.out.println("Введите команду");
     if (!scanner.hasNext()) {
@@ -38,7 +38,7 @@ public enum Shop {
    * Метод выводит меню в консоль
    */
   public static void printMenu() {
-    for (Shop shop : values()) {
+    for (EnumShop shop : values()) {
       if (!shop.message.isEmpty()) {
         System.out.println(shop.ordinal() + "." + shop.message);
       }

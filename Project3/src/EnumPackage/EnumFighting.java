@@ -2,13 +2,13 @@ package EnumPackage;
 
 import java.util.Scanner;
 
-public enum Fighting {
+public enum EnumFighting {
   UNEXPECTED(""),
   SELECTION("Выбор соперника"),
   EXIT("Выход");
   private final String message;
 
-  Fighting(String message) {
+  EnumFighting(String message) {
     this.message = message;
   }
 
@@ -16,7 +16,7 @@ public enum Fighting {
     return message;
   }
 
-  public static Fighting readCommand(Scanner scanner) {
+  public static EnumFighting readCommand(Scanner scanner) {
     printMenu();
     System.out.println("Введите команду");
     if (!scanner.hasNext()) {
@@ -38,7 +38,7 @@ public enum Fighting {
    * Метод выводит меню в консоль
    */
   public static void printMenu() {
-    for (Fighting fighting : values()) {
+    for (EnumFighting fighting : values()) {
       if (!fighting.message.isEmpty()) {
         System.out.println(fighting.ordinal() + "." + fighting.message);
       }
