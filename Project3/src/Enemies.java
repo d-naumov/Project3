@@ -4,10 +4,13 @@ public class Enemies {
     private int health;
     private int strength;
 
-    public Enemies(String name, int health, int strength) {
+    private int money;
+
+    public Enemies(String name, int health, int strength, int money) {
         this.name = name;
         this.health = health;
         this.strength = strength;
+        this.money = money;
     }
 
     public String getName() {
@@ -20,5 +23,9 @@ public class Enemies {
 
     public int getStrength() {
         return strength;
+    }
+
+    public int getMoney() {
+        return money;
     }
 }

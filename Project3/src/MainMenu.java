@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class MainMenu {
 
-    public Buratino buratino;
+    public static Buratino buratino;
     public static Scanner scanner = new Scanner(System.in);
 
     public static void getBuratinoFromFile() {
-        File inputFile = new File("Files/Buratino.csv");
+        File inputFile = new File("res/Buratino.csv");
         Buratino buratino;
         try {
             scanner = new Scanner(inputFile);
@@ -19,7 +19,6 @@ public class MainMenu {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-
         System.out.println(buratino.toString());
     }
 
