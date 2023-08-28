@@ -4,11 +4,14 @@ public class Buratino {
     private int health;
     private int strength;
 
+    private int money;
 
-    public Buratino(String name, int health, int strength) {
+
+    public Buratino(String name, int health, int strength, int money) {
         this.name = name;
         this.health = health;
         this.strength = strength;
+        this.money = money;
     }
 
     public String getName() {
@@ -29,5 +32,15 @@ public class Buratino {
 
     public void setStrength(int strength) {
         this.strength = strength;
+    }
+
+    @Override
+    public String toString() {
+        return "Buratino{" +
+                "name='" + name + '\'' +
+                ", health=" + health +
+                ", strength=" + strength +
+                ", money=" + money +
+                '}';
     }
 }
