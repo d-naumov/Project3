@@ -1,7 +1,26 @@
+import EnumPackage.MainMenu;
+import java.util.Scanner;
+
 public class Main {
   public static void main(String[] args) {
-    System.out.println("Hallo");
+    Scanner scanner = new Scanner(System.in);
 
-    MainMenu.getBuratinoFromFile();
+    while (true) {
+      MainMenu menu = MainMenu.readCommand(scanner);
+
+      switch (menu) {
+        case FIGHTING:
+          break;
+        case SHOP:
+          break;
+        case EXIT:
+
+          return;
+        default:
+          System.out.println("Некорректная команда");
+      }
+    }
   }
+
+
 }
