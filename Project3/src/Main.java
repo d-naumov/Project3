@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class Main {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
-
     while (true) {
       EnumMainMenu menu = EnumMainMenu.readCommand(scanner);
 
@@ -16,6 +15,9 @@ public class Main {
           break;
         case SHOP:
           Shop.readCommand(scanner);
+          break;
+        case INFORMATION:
+          //Надо добавить
           break;
         case EXIT:
 
