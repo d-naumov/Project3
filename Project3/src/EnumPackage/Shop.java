@@ -2,14 +2,13 @@ package EnumPackage;
 
 import java.util.Scanner;
 
-public enum MainMenu {
+public enum Shop {
   UNEXPECTED(""),
-  FIGHTING("Сражение"),
-  SHOP("Магазин"),
+  SELECTION("Выбор товара"),
   EXIT("Выход");
   private final String message;
 
-  MainMenu(String message) {
+  Shop(String message) {
     this.message = message;
   }
 
@@ -17,8 +16,7 @@ public enum MainMenu {
     return message;
   }
 
-
-  public static MainMenu readCommand(Scanner scanner) {
+  public static Shop readCommand(Scanner scanner) {
     printMenu();
     System.out.println("Введите команду");
     if (!scanner.hasNext()) {
@@ -28,10 +26,8 @@ public enum MainMenu {
     scanner.nextLine();
     switch (input.toLowerCase()) {
       case "1":
-        return FIGHTING;
+        return SELECTION;
       case "2":
-        return SHOP;
-      case "3":
         return EXIT;
       default:
         return UNEXPECTED;
@@ -42,9 +38,9 @@ public enum MainMenu {
    * Метод выводит меню в консоль
    */
   public static void printMenu() {
-    for (MainMenu menu : values()) {
-      if (!menu.message.isEmpty()) {
-        System.out.println(menu.ordinal() + "." + menu.message);
+    for (Shop shop : values()) {
+      if (!shop.message.isEmpty()) {
+        System.out.println(shop.ordinal() + "." + shop.message);
       }
     }
   }
