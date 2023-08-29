@@ -17,10 +17,11 @@ public class Main {
           break;
         case SHOP:
           EnumShop.readCommand(scanner);
+          Shop.selection(MainMenu.buratino, scanner);
           break;
         case INFORMATION:
           //Надо добавить
-          System.out.println(MainMenu.getBurarino().toString());
+          System.out.println(MainMenu.buratino.toString());
           break;
         case EXIT:
 

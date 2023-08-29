@@ -61,9 +61,9 @@ public class MainMenu {
         List<Enemies> enemies = getEnemiesFromFile();
         int enemyHealth = enemies.get(index - 1).getHealth();
         int enemyAtack = enemies.get(index - 1).getStrength();
-
         int buratinoCount = 0;
         int enemyCount = 0;
+
         for (int i = 0; buratinoHealth > 10; i++) {
             buratinoHealth -= enemyAtack;
             enemyCount = i;

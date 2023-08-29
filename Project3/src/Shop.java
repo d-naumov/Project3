@@ -1,14 +1,9 @@
+
 import java.util.Scanner;
 
 public class Shop {
 
-  private Buratino buratino;
-
-  public Shop(Buratino buratino) {
-    this.buratino = buratino;
-  }
-
-  public void selection() {
+  public static void selection(Buratino buratino, Scanner scanner) {
     System.out.println("Добро пожаловать в магазин!");
     System.out.println(
         "Вы имеете " + buratino.getMoney() + " монет"); // добавил getMoney в классе Buratino
@@ -16,10 +11,13 @@ public class Shop {
     System.out.println("1. Купить предмет");
     System.out.println("2. Продать предмет");
     System.out.println("3. Выйти из магазина");
-    Scanner scanner = new Scanner(System.in);
     int choice = scanner.nextInt();
     switch (choice) {
       case 1:
+        System.out.println("regbkb");
+        System.out.println(MainMenu.buratino.getMoney());
+        MainMenu.buratino.setMoney(1);
+        System.out.println(MainMenu.buratino.getMoney());
         // Список имеющихся предметов в магазине
         break;
       case 2:
