@@ -2,14 +2,15 @@ public class Item {
 
   private String name;   // Название предмета
   private int price;     // Стоимость предмета
-  private int IncreaseHealth;    // Влияние на характеристику здоровье персонажа
-  private int IncreaseStrength;  // Влияние на характеристику сила персонажа
+  private int increaseHealth;    // Влияние на характеристику здоровье персонажа
+  private int increaseStrength;  // Влияние на характеристику сила персонажа
 
-  public Item(String name, int price, int health, int strength) {
+
+  public Item(String name, int price, int increaseHealth, int increaseStrength) {
     this.name = name;
     this.price = price;
-    this.health = health;
-    this.strength = strength;
+    this.increaseHealth = increaseHealth;
+    this.increaseStrength = increaseStrength;
   }
 
   @Override
@@ -17,9 +18,8 @@ public class Item {
     return "Item{" +
         "name='" + name + '\'' +
         ", price=" + price +
-        ", health=" + health +
-        ", strength=" + strength +
+        ", increaseHealth=" + increaseHealth +
+        ", increaseStrength=" + increaseStrength +
         '}';
   }
-
 }
