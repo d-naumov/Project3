@@ -17,21 +17,20 @@ public class Main {
   }
   public static void firstMenu(){
     Scanner scanner = new Scanner(System.in);
-    boolean flag = true;
-    while (flag) {
+    while (true) {
       EnumStartMenu menu = EnumStartMenu.readCommand(scanner);
       switch (menu) {
-        case NEW_GAME:
+        case NEW_GAME -> {
           System.out.println("Начинаем новую игру. Выберите ваши действия!");
-         startMenu();
-          break;
-        case LOAD_GAME:
-          // Загрузить игру
-          break;
-        case EXIT:
+          startMenu();
+        }
+        case LOAD_GAME -> {
+        }
+        // Загрузить игру
+        case EXIT -> {
           return;
-        default:
-          System.out.println("Некорректная команда");
+        }
+        default -> System.out.println("Некорректная команда");
       }
     }
   }
@@ -43,22 +42,18 @@ public class Main {
       EnumMainMenu menu = EnumMainMenu.readCommand(scanner);
 
       switch (menu) {
-        case FIGHTING:
-          MainMenu.enemiesInfo(scanner);
-
-          break;
-        case SHOP:
+        case FIGHTING -> MainMenu.enemiesInfo(scanner);
+        case SHOP -> {
           EnumShop.readCommand(scanner);
           Shop.selection(MainMenu.buratino, scanner);
-          break;
-        case INFORMATION:
+        }
+        case INFORMATION ->
           //Надо добавить
-          System.out.println(MainMenu.buratino.toString());
-          break;
-        case EXIT:
+            System.out.println(MainMenu.buratino.toString());
+        case EXIT -> {
           return;
-        default:
-          System.out.println("Некорректная команда");
+        }
+        default -> System.out.println("Некорректная команда");
       }
     }
   }
