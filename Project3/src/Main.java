@@ -1,6 +1,5 @@
 import EnumPackage.EnumMainMenu;
 import EnumPackage.EnumShop;
-
 import java.util.Scanner;
 
 public class Main {
@@ -16,8 +15,8 @@ public class Main {
 
       switch (menu) {
         case FIGHTING:
-          MainMenu.enemiesInfo(scanner);
 
+          MainMenu.enemiesInfo(scanner);
           break;
         case SHOP:
           EnumShop.readCommand(scanner);

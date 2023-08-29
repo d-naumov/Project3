@@ -1,85 +1,117 @@
 import EnumPackage.EnumFighting;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class MainMenu {
+
+  List<Enemies> enemies = new ArrayList<>();
+  static Buratino buratino = new Buratino("Buratino", 140, 22, 10);
+
+  public MainMenu() {
+  }
+
+
+  public static Scanner scanner = new Scanner(System.in);
+
+  public static List<Enemies> getEnemiesFromFile() {
+    File enemiesFile = new File("res/Enemies.csv");
     List<Enemies> enemies = new ArrayList<>();
-    static Buratino buratino = new Buratino("Buratino", 140, 22, 10);
+    try {
+      scanner = new Scanner(enemiesFile);
+      while (scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        String[] data = line.split(",");
+        if (data.length > 1) {
+          Enemies enemy = new Enemies(data[0], Integer.parseInt(data[1]), Integer.parseInt(data[2]),
+              Integer.parseInt(data[3]));
+          enemies.add(enemy);
+        }
+      }
 
-    public MainMenu() {
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+    return enemies;
+  }
+
+  public static void enemiesInfo(Scanner chouse) {
+    List<Enemies> enemies = getEnemiesFromFile();
+    EnumFighting.readCommand(chouse);
+    System.out.println("Выберите врага для сражения:");
+    for (int i = 0; i < enemies.size(); i++) {
+      System.out.println((i + 1) + ". " + enemies.get(i).getName());
     }
 
+    enemyToFight(chouse);
+  }
 
-    public static Scanner scanner = new Scanner(System.in);
+  public static void enemyToFight(Scanner scanner) {
+    int index = scanner.nextInt();
+    System.out.println(index);
+    fight(index);
+  }
 
-    public static List<Enemies> getEnemiesFromFile() {
-        File enemiesFile = new File("res/Enemies.csv");
-        List<Enemies> enemies = new ArrayList<>();
+  private static void fight(int choice) {
+    List<Enemies> enemies = getEnemiesFromFile();
+
+    if (choice >= 1 && choice <= enemies.size()) {
+      Enemies selectedEnemy = enemies.get(choice - 1);
+      System.out.println("Вы выбрали сражаться с " + selectedEnemy.getName() + "!");
+      System.out.println("Начинается битва...");
+
+      Random random = new Random();
+
+      while (buratino.getHealth() > 0 && selectedEnemy.getHealth() > 0) {
+        int buratinoAttack =
+            buratino.getStrength() + random.nextInt(5); // Случайное число от 0 до 4
+        int enemyAttack = selectedEnemy.getStrength() + random.nextInt(5);
+
+        int buratinoDefense = random.nextInt(3); // Случайное число от 0 до 2
+        int enemyDefense = random.nextInt(3);
+
+        // Учитываем защиту
+        buratinoAttack -= enemyDefense;
+        enemyAttack -= buratinoDefense;
+
+        if (buratinoAttack < 0) {
+          buratinoAttack = 0;
+        }
+        if (enemyAttack < 0) {
+          enemyAttack = 0;
+        }
+
+        selectedEnemy.decreaseHealth(buratinoAttack);
+        buratino.decreaseHealth(enemyAttack);
+
+        System.out.println("Вы нанесли врагу " + buratinoAttack + " урона.");
+        System.out.println("Враг нанес вам " + enemyAttack + " урона.");
+
+        // Немного задержки для улучшения визуального восприятия
         try {
-            scanner = new Scanner(enemiesFile);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] data = line.split(",");
-                if (data.length > 1) {
-                    Enemies enemy = new Enemies(data[0], Integer.parseInt(data[1]), Integer.parseInt(data[2]), Integer.parseInt(data[3]));
-                    enemies.add(enemy);
-                }
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+          Thread.sleep(1000);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
         }
-        return enemies;
+      }
+
+      if (buratino.getHealth() <= 0) {
+        System.out.println("Вы проиграли битву.");
+        System.exit(0);
+      } else {
+        System.out.println("Вы победили врага!");
+        int reward = random.nextInt(10) + 10; // Случайное число от 10 до 19
+        buratino.increaseMoney(reward);
+        System.out.println("Вы получили " + reward + " монет.");
+
+      }
+
+    } else {
+      System.out.println("Некорректный выбор врага.");
     }
-
-    public static void enemiesInfo(Scanner chouse) {
-        List<Enemies> enemies = getEnemiesFromFile();
-        int num = 1;
-        EnumFighting.readCommand(chouse);
-        for (Enemies enemy : enemies) {
-            System.out.println(num + " " + enemy.toString());
-            num++;
-        }
-
-        enemyToFight(chouse);
-
-
-    }
-
-    public static void enemyToFight(Scanner scanner) {
-        int index = scanner.nextInt();
-        System.out.println(index);
-        fight(index);
-    }
-
-    public static void fight(int index) {
-        int buratinoHealth = buratino.getHealth();
-        int buratinoAtack = buratino.getStrength();
-        List<Enemies> enemies = getEnemiesFromFile();
-        int enemyHealth = enemies.get(index - 1).getHealth();
-        int enemyAtack = enemies.get(index - 1).getStrength();
-        int buratinoCount = 0;
-        int enemyCount = 0;
-
-        for (int i = 0; buratinoHealth > 10; i++) {
-            buratinoHealth -= enemyAtack;
-            enemyCount = i;
-        }
-        for (int i = 0; enemyHealth > 10; i++) {
-            enemyHealth -= buratinoAtack;
-            buratinoCount = i;
-        }
-
-        if (buratinoCount < enemyCount) {
-            System.out.println("win");
-            buratino.setMoney(buratino.getMoney() + enemies.get(index - 1).getMoney());
-            System.out.println(buratino.getMoney());
-        } else System.out.println("lose" + buratinoCount);
-
-    }
+  }
 
 //    public static void getBuratinoFromFile(nameFile) {
 //        File inputFile = new File("res/Buratino.csv");
@@ -100,8 +132,8 @@ public class MainMenu {
 //        System.out.println(this.buratino.toString());
 //    }
 
-    public static Buratino getBurarino() {
-        return buratino;
-    }
+  public static Buratino getBurarino() {
+    return buratino;
+  }
 
 }
