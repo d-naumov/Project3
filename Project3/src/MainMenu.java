@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class MainMenu {
 
   List<Enemies> enemies = new ArrayList<>();
-  static Buratino buratino = new Buratino("Buratino", 140, 22, 10);
+  static Buratino buratino = new Buratino("Buratino", 180, 22, 10);
 
   public MainMenu() {
   }
@@ -44,7 +44,6 @@ public class MainMenu {
     for (int i = 0; i < enemies.size(); i++) {
       System.out.println((i + 1) + ". " + enemies.get(i).getName());
     }
-
     enemyToFight(chouse);
   }
 
@@ -53,63 +52,58 @@ public class MainMenu {
     System.out.println(index);
     fight(index);
   }
-
   private static void fight(int choice) {
     List<Enemies> enemies = getEnemiesFromFile();
 
-    if (choice >= 1 && choice <= enemies.size()) {
-      Enemies selectedEnemy = enemies.get(choice - 1);
-      System.out.println("Вы выбрали сражаться с " + selectedEnemy.getName() + "!");
-      System.out.println("Начинается битва...");
-
-      Random random = new Random();
-
-      while (buratino.getHealth() > 0 && selectedEnemy.getHealth() > 0) {
-        int buratinoAttack =
-            buratino.getStrength() + random.nextInt(5); // Случайное число от 0 до 4
-        int enemyAttack = selectedEnemy.getStrength() + random.nextInt(5);
-
-        int buratinoDefense = random.nextInt(3); // Случайное число от 0 до 2
-        int enemyDefense = random.nextInt(3);
-
-        // Учитываем защиту
-        buratinoAttack -= enemyDefense;
-        enemyAttack -= buratinoDefense;
-
-        if (buratinoAttack < 0) {
-          buratinoAttack = 0;
-        }
-        if (enemyAttack < 0) {
-          enemyAttack = 0;
-        }
-
-        selectedEnemy.decreaseHealth(buratinoAttack);
-        buratino.decreaseHealth(enemyAttack);
-
-        System.out.println("Вы нанесли врагу " + buratinoAttack + " урона.");
-        System.out.println("Враг нанес вам " + enemyAttack + " урона.");
-
-        // Немного задержки для улучшения визуального восприятия
-        try {
-          Thread.sleep(1000);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-      }
-
-      if (buratino.getHealth() <= 0) {
-        System.out.println("Вы проиграли битву.");
-        System.exit(0);
-      } else {
-        System.out.println("Вы победили врага!");
-        int reward = random.nextInt(10) + 10; // Случайное число от 10 до 19
-        buratino.increaseMoney(reward);
-        System.out.println("Вы получили " + reward + " монет.");
-
-      }
-
-    } else {
+    if (choice < 1 || choice > enemies.size()) {
       System.out.println("Некорректный выбор врага.");
+      return;
+    }
+
+    Enemies selectedEnemy = enemies.get(choice - 1);
+    System.out.println("Вы выбрали сражаться с " + selectedEnemy.getName() + "!");
+    System.out.println("Начинается битва...");
+
+    Random random = new Random();
+
+    while (buratino.getHealth() > 0 && selectedEnemy.getHealth() > 0) {
+      int buratinoAttack = buratino.getStrength() + random.nextInt(5);
+      int enemyAttack = selectedEnemy.getStrength() + random.nextInt(5);
+
+      int buratinoDefense = random.nextInt(3);
+      int enemyDefense = random.nextInt(3);
+
+      // Учитываем защиту
+      buratinoAttack -= enemyDefense;
+      enemyAttack -= buratinoDefense;
+
+      if (buratinoAttack < 0) {
+        buratinoAttack = 0;
+      }
+      if (enemyAttack < 0) {
+        enemyAttack = 0;
+      }
+      selectedEnemy.decreaseHealth(buratinoAttack);
+      buratino.decreaseHealth(enemyAttack);
+
+      System.out.println("Вы нанесли врагу " + buratinoAttack + " урона.");
+      System.out.println("Враг нанес вам " + enemyAttack + " урона.");
+
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+
+    if (buratino.getHealth() <= 0) {
+      System.out.println("Вы проиграли битву.");
+      System.exit(0);
+    } else {
+      System.out.println("Вы победили врага!");
+      int reward = random.nextInt(10, 20);
+      buratino.increaseMoney(reward);
+      System.out.println("Вы получили " + reward + " монет.");
     }
   }
 
