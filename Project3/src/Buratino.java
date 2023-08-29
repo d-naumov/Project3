@@ -14,6 +14,10 @@ public class Buratino {
         this.money = money;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
     public String getName() {
         return name;
     }

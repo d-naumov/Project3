@@ -44,4 +44,8 @@ public enum EnumShop {
       }
     }
   }
+
+  public static void buyItem() {
+
+  }
 }
