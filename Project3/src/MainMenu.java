@@ -37,6 +37,7 @@ public class MainMenu {
     return enemies;
   }
 
+
   public static void enemiesInfo(Scanner chouse) {
     List<Enemies> enemies = getEnemiesFromFile();
     EnumFighting.readCommand(chouse);
@@ -52,7 +53,82 @@ public class MainMenu {
     System.out.println(index);
     fight(index);
   }
+
   private static void fight(int choice) {
+    List<Enemies> enemies = getEnemiesFromFile();
+
+    if (choice < 1 || choice > enemies.size()) {
+      System.out.println("Некорректный выбор врага.");
+      return;
+    }
+
+    Enemies selectedEnemy = enemies.get(choice - 1);
+    System.out.println("Вы выбрали сражаться с " + selectedEnemy.getName() + "!");
+    System.out.println("Начинается битва...");
+
+    Random random = new Random();
+
+    while (buratino.getHealth() > 0 && selectedEnemy.getHealth() > 0) {
+      int buratinoAttack = calculateBuratinoAttack(buratino.getStrength(), random);
+      int enemyAttack = calculateEnemyAttack(selectedEnemy.getStrength(), random);
+
+      int buratinoDefense = random.nextInt(3);
+      int enemyDefense = random.nextInt(3);
+
+      buratinoAttack -= enemyDefense;
+      enemyAttack -= buratinoDefense;
+
+      if (buratinoAttack < 0) {
+        buratinoAttack = 0;
+      }
+      if (enemyAttack < 0) {
+        enemyAttack = 0;
+      }
+      performAttacks(selectedEnemy, buratinoAttack, enemyAttack);
+
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+
+    if (buratino.getHealth() <= 0) {
+      System.out.println("Вы проиграли битву.");
+      System.exit(0);
+    } else {
+      int reward = generateReward(random);
+      displayVictoryMessage(reward);
+    }
+  }
+
+  private static int calculateBuratinoAttack(int buratinoStrength, Random random) {
+    return buratinoStrength + random.nextInt(5);
+  }
+
+  private static int calculateEnemyAttack(int enemyStrength, Random random) {
+    return enemyStrength + random.nextInt(5);
+  }
+
+  private static void performAttacks(Enemies selectedEnemy, int buratinoAttack, int enemyAttack) {
+    selectedEnemy.decreaseHealth(buratinoAttack);
+    buratino.decreaseHealth(enemyAttack);
+
+    System.out.println("Вы нанесли врагу " + buratinoAttack + " урона.");
+    System.out.println("Враг нанес вам " + enemyAttack + " урона.");
+  }
+
+  private static int generateReward(Random random) {
+    return random.nextInt(10, 20);
+  }
+
+  private static void displayVictoryMessage(int reward) {
+    System.out.println("Вы победили врага!");
+    buratino.increaseMoney(reward);
+    System.out.println("Вы получили " + reward + " монет.");
+  }
+
+ /* private static void fight(int choice) {
     List<Enemies> enemies = getEnemiesFromFile();
 
     if (choice < 1 || choice > enemies.size()) {
@@ -106,6 +182,8 @@ public class MainMenu {
       System.out.println("Вы получили " + reward + " монет.");
     }
   }
+
+  */
 
 //    public static void getBuratinoFromFile(nameFile) {
 //        File inputFile = new File("res/Buratino.csv");
