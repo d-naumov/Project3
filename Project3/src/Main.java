@@ -5,6 +5,10 @@ import java.util.Scanner;
 
 public class Main {
   public static void main(String[] args) {
+    startMenu();
+  }
+
+  public static void startMenu() {
     Scanner scanner = new Scanner(System.in);
     boolean flag = true;
     while (flag) {
