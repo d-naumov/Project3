@@ -1,23 +1,26 @@
 import EnumPackage.EnumMainMenu;
-import EnumPackage.Fighting;
-import EnumPackage.Shop;
+import EnumPackage.EnumShop;
+
 import java.util.Scanner;
 
 public class Main {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
-    while (true) {
+    boolean flag = true;
+    while (flag) {
       EnumMainMenu menu = EnumMainMenu.readCommand(scanner);
 
       switch (menu) {
         case FIGHTING:
-          Fighting.readCommand(scanner);
+          MainMenu.enemiesInfo(scanner);
+
           break;
         case SHOP:
-          Shop.readCommand(scanner);
+          EnumShop.readCommand(scanner);
           break;
         case INFORMATION:
           //Надо добавить
+          System.out.println(MainMenu.getBurarino().toString());
           break;
         case EXIT:
 

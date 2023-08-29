@@ -28,4 +28,14 @@ public class Enemies {
     public int getMoney() {
         return money;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "name='" + name + '\'' +
+                ", health=" + health +
+                ", strength=" + strength +
+                ", money=" + money +
+                '}';
+    }
 }

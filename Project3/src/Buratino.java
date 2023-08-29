@@ -38,11 +38,14 @@ public class Buratino {
         this.strength = strength;
     }
 
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
     @Override
     public String toString() {
         return "Buratino{" +
-                "name='" + name + '\'' +
-                ", health=" + health +
+                "health=" + health +
                 ", strength=" + strength +
                 ", money=" + money +
                 '}';
