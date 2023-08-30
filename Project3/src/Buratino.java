@@ -63,7 +63,7 @@ public class Buratino {
 
     public void decreaseMoney(int amount) {
         if (amount > money) {
-            System.out.println("Недостаточно денег.");
+            System.out.println("You don't have enough money.");
         } else {
             money -= amount;
         }
@@ -71,9 +71,9 @@ public class Buratino {
     @Override
     public String toString() {
         return "Buratino:" +
-            " Health " + health +
-            ", Strength " + strength +
-            ", Money " + money +
+            " Health - " + health +
+            ", Strength - " + strength +
+            ", Money - " + money +
             ' ';
     }
 }
