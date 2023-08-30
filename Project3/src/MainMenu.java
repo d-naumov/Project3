@@ -1,5 +1,3 @@
-import EnumPackage.EnumFighting;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -37,7 +35,8 @@ public class MainMenu {
       String line = scanner.nextLine();
       String[] data = line.split(",");
       loadName = data[0];
-      allLoads.add(new Buratino(data[0], Integer.parseInt(data[1]), Integer.parseInt(data[2]), Integer.parseInt(data[3])));
+      allLoads.add(new Buratino(data[0], Integer.parseInt(data[1]), Integer.parseInt(data[2]),
+          Integer.parseInt(data[3])));
       System.out.println(data[0]);
     }
     Scanner scanner1 = new Scanner(System.in);
@@ -51,9 +50,8 @@ public class MainMenu {
     return null;
   }
 
-
-
   public static Scanner scanner = new Scanner(System.in);
+
   public static List<Enemies> getEnemiesFromFile() {
     File enemiesFile = new File("res/Enemies.csv");
     List<Enemies> enemies = new ArrayList<>();
@@ -78,18 +76,23 @@ public class MainMenu {
 
   public static void enemiesInfo(Scanner chouse) {
     List<Enemies> enemies = getEnemiesFromFile();
-    EnumFighting.readCommand(chouse);
     System.out.println("Выберите врага для сражения:");
     for (int i = 0; i < enemies.size(); i++) {
-      System.out.println((i + 1) + ". " + enemies.get(i).getName());
+      System.out.println(
+          (i + 1) + ". " + enemies.get(i).getName() + ": Health " + enemies.get(i).getHealth()
+              + ", Strength " + enemies.get(i)
+              .getStrength() + ", Money " + enemies.get(i).getMoney());
     }
     enemyToFight(chouse);
   }
-
   public static void enemyToFight(Scanner scanner) {
-    int index = scanner.nextInt();
-    System.out.println(index);
-    fight(index);
+    if (scanner.hasNextInt()) {
+      int index = scanner.nextInt();
+      fight(index);
+    } else {
+      System.out.println("Некорректный ввод. Введите число.");
+      scanner.nextLine(); // Очистить буфер ввода
+    }
   }
 
   private static void fight(int choice) {
