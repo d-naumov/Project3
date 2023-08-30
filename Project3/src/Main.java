@@ -1,3 +1,5 @@
+import EnumPackage.EnumMainMenu;
+import EnumPackage.EnumShop;
 import java.util.Scanner;
 
 public class Main {
@@ -6,6 +8,7 @@ public class Main {
   public static final int EXIT = 3;
 
   public static void main(String[] args) {
+    runNewGameMessage();
     StartNewGameMenu();
   }
 
@@ -16,7 +19,6 @@ public class Main {
       switch (menu) {
         case NEW_GAME -> {
           System.out.println("Начинаем новую игру. Выберите ваши действия!");
-          runNewGameMessage();
           startMenu();
         }
         case LOAD_GAME -> {
@@ -29,7 +31,6 @@ public class Main {
       }
     }
   }
-
   public static int readCommand(Scanner scanner) {
     printMenu();
     System.out.println("Вы хотите начать игру сначала или загрузить ");
@@ -49,7 +50,6 @@ public class Main {
         return -1; // Represents UNEXPECTED
     }
   }
-
   public static void runNewGameMessage() {
     System.out.println("--------------------------------------------------------------------");
     System.out.println("Привет Буратино! Мы тебя так долго ждали, нам нужна твоя помощь. ");
@@ -58,19 +58,21 @@ public class Main {
     System.out.println("     Победи и получишь \"Золотой ключик\".");
     System.out.println("---------------------------------------------------------------------");
   }
-
   public static void startMenu() {
     Scanner scanner = new Scanner(System.in);
     boolean flag = true;
     while (flag) {
-      int menu = readCommand(scanner); // Assuming readCommand method works for startMenu too
+      EnumMainMenu menu = EnumMainMenu.readCommand(scanner);
       switch (menu) {
-        case 1 -> MainMenu.enemiesInfo(scanner); // Assuming 1 corresponds to FIGHTING
-        case 2 -> {
-          // Shop logic
-          // Shop.selection(MainMenu.buratino, scanner);
+        case FIGHTING -> MainMenu.enemiesInfo(scanner);
+        case SHOP -> {
+          EnumShop.readCommand(scanner);
+          Shop.selection(MainMenu.buratino, scanner);
         }
-        case 3 -> {
+        case INFORMATION ->
+          //Надо добавить
+            System.out.println(MainMenu.buratino.toString());
+        case EXIT -> {
           return;
         }
         default -> System.out.println("Некорректная команда");
