@@ -105,7 +105,7 @@ public class MainMenu {
   /**
    * Сохраняет игру, указывая имя сохранения.
    *
-   * @param saveName Имя сохранения игры.
+   * @param "saveName" Имя сохранения игры.
    */
   public static void saveGame() {
     String saveName;
@@ -118,7 +118,7 @@ public class MainMenu {
   /**
    * Добавляет сохранение в файл.
    *
-   * @param res/Save.csv Имя сохранения.
+   * @param "res/Save.csv" Имя сохранения.
    */
   public static void addSaveToFile(String name) {
     List<Buratino> allSave = getSaveToFile(false);
