@@ -70,10 +70,10 @@ public class Buratino {
     }
     @Override
     public String toString() {
-        return "Buratino{" +
-                "health=" + health +
-                ", strength=" + strength +
-                ", money=" + money +
-                '}';
+        return "Buratino:" +
+            " Health " + health +
+            ", Strength " + strength +
+            ", Money " + money +
+            ' ';
     }
 }

@@ -2,6 +2,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 public class Shop {
 
   private static final String HEALTH = "Health";
@@ -14,12 +15,18 @@ public class Shop {
     displayItems(items);
 
     System.out.println("Press any other key to exit");
-    int choice = scanner.nextInt();
 
-    if (choice >= 1 && choice <= items.size()) {
-      buyItem(buratino, items.get(choice - 1));
+    if (scanner.hasNextInt()) {
+      int choice = scanner.nextInt();
+
+      if (choice >= 1 && choice <= items.size()) {
+        buyItem(buratino, items.get(choice - 1));
+      } else {
+        System.out.println("Invalid choice. Exiting the shop.");
+      }
     } else {
-      System.out.println("Exiting the shop.");
+      System.out.println("Invalid input. Exiting the shop.");
+      scanner.nextLine(); // Clear input buffer
     }
   }
 

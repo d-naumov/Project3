@@ -1,4 +1,5 @@
 import EnumPackage.EnumFighting;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -161,13 +162,13 @@ public class MainMenu {
 
   private static void displayVictoryMessage(int reward, Enemies enemy) {
     if (enemy.getName().equals("Karabas-Barabas")) {
-      displayKarabasVictoryMessage();
-    } else {
-      System.out.println("Вы победили врага!");
-      buratino.increaseMoney(reward);
-      System.out.println("Вы получили " + reward + " монет.");
+      System.out.println("тут будет новый метод про з");
     }
+    System.out.println("Вы победили врага!");
+    buratino.increaseMoney(reward);
+    System.out.println("Вы получили " + reward + " монет.");
   }
+}
 
   private static void displayKarabasVictoryMessage() {
     String text = "You have defeated the fearsome Karabas-Barabas.\n"
