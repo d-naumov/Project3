@@ -1,9 +1,9 @@
 public class Item {
 
-  private String name;   // Название предмета
-  private int price;     // Стоимость предмета
-  private int increaseHealth;    // Влияние на характеристику здоровье персонажа
-  private int increaseStrength;  // Влияние на характеристику сила персонажа
+  private String name;
+  private int price;
+  private int increaseHealth;
+  private int increaseStrength;
 
 
   public Item(String name, int price, int increaseHealth, int increaseStrength) {
@@ -31,11 +31,9 @@ public class Item {
 
   @Override
   public String toString() {
-    return "Item{" +
-        "name='" + name + '\'' +
-        ", price=" + price +
-        ", increaseHealth=" + increaseHealth +
-        ", increaseStrength=" + increaseStrength +
-        '}';
+    return name + '\'' +
+        ", Price - " + price +
+        " coins (+" + increaseHealth +
+        " Health , +" + increaseStrength + " Strength)";
   }
 }
