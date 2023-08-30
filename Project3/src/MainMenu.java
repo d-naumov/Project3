@@ -228,10 +228,55 @@ public class MainMenu {
    */
   private static void displayVictoryMessage(int reward, Enemies enemy) {
     if (enemy.getName().equals("Karabas-Barabas")) {
-      System.out.println("тут будет новый метод про з");
+      displayKarabasVictoryMessage();
+    } else {
+      System.out.println("Вы победили врага!");
+      buratino.increaseMoney(reward);
+      System.out.println("Вы получили " + reward + " монет.");
     }
-    System.out.println("Вы победили врага!");
-    buratino.increaseMoney(reward);
-    System.out.println("Вы получили " + reward + " монет.");
+  }
+  private static void displayKarabasVictoryMessage() {
+    String text = "You have defeated the fearsome Karabas-Barabas.\n"
+        + "You received the Golden Key and opened the secret room\n" +
+        "in which you found the puppet theater\n" +
+        "Buratino, Papa Carlo and friends successfully put on a play\n";
+    int delayMillis = 40;
+    for (char c : text.toCharArray()) {
+      System.out.print(c);
+      try {
+        Thread.sleep(delayMillis);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+    System.out.println("  Credits");
+    displayCredits();
+    System.out.println(" Producers");
+    displayCredits();
+    System.out.println(" Desiners");
+    displayCredits();
+    System.out.println(" Programmers");
+    displayCredits();
+    System.out.println("  Artists");
+    displayCredits();
+    System.exit(0);
+  }
+
+  private static void displayCredits() {
+    String[] credits = {
+        "Denis Kovtun",
+        "Dimitri Naumov",
+        "Natalja Röhm",
+        "Egor Danilov"
+    };
+    int delayMillis = 800;
+    for (String message : credits) {
+      System.out.println(message);
+      try {
+        Thread.sleep(delayMillis);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
   }
 }
