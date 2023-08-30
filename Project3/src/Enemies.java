@@ -29,6 +29,9 @@ public class Enemies {
         return money;
     }
 
+    public void decreaseHealth(int amount) {
+        health -= amount;
+    }
     @Override
     public String toString() {
         return "{" +

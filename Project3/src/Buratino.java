@@ -42,6 +42,21 @@ public class Buratino {
         this.money = money;
     }
 
+    public void decreaseHealth(int amount) {
+        health -= amount;
+    }
+
+    public void increaseMoney(int amount) {
+        money += amount;
+    }
+
+    public void decreaseMoney(int amount) {
+        if (amount > money) {
+            System.out.println("Недостаточно денег.");
+        } else {
+            money -= amount;
+        }
+    }
     @Override
     public String toString() {
         return "Buratino{" +
