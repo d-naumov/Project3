@@ -183,7 +183,7 @@ public class MainMenu {
    * Вычисляет атаку главного героя.
    *
    * @param buratinoStrength сила главного героя
-   * @param random объект для генерации случайных чисел
+   * @param random           объект для генерации случайных чисел
    * @return значение атаки главного героя
    */
   private static int calculateBuratinoAttack(int buratinoStrength, Random random) {
@@ -194,7 +194,7 @@ public class MainMenu {
    * Вычисляет атаку врага.
    *
    * @param enemyStrength сила врага
-   * @param random объект для генерации случайных чисел
+   * @param random        объект для генерации случайных чисел
    * @return значение атаки врага
    */
   private static int calculateEnemyAttack(int enemyStrength, Random random) {
@@ -204,9 +204,9 @@ public class MainMenu {
   /**
    * Осуществляет атаки между главным героем и врагом.
    *
-   * @param selectedEnemy выбранный враг
+   * @param selectedEnemy  выбранный враг
    * @param buratinoAttack атака главного героя
-   * @param enemyAttack атака врага
+   * @param enemyAttack    атака врага
    */
   private static void performAttacks(Enemies selectedEnemy, int buratinoAttack, int enemyAttack) {
     selectedEnemy.decreaseHealth(buratinoAttack);
@@ -230,7 +230,7 @@ public class MainMenu {
    * Выводит сообщение о победе и обработку награды.
    *
    * @param reward количество награды
-   * @param enemy враг, побежденный героем
+   * @param enemy  враг, побежденный героем
    */
   private static void displayVictoryMessage(int reward, Enemies enemy) {
     if (enemy.getName().equals("Karabas-Barabas")) {
@@ -241,6 +241,10 @@ public class MainMenu {
       System.out.println("Вы получили " + reward + " монет.");
     }
   }
+
+  /**
+   * Отображает сообщение о победе над страшным Карабас-Барабасом и список кредитов.
+   */
   private static void displayKarabasVictoryMessage() {
     String text = "You have defeated the fearsome Karabas-Barabas.\n"
         + "You received the Golden Key and opened the secret room\n" +
@@ -268,6 +272,9 @@ public class MainMenu {
     System.exit(0);
   }
 
+  /**
+   * Отображение списка
+   */
   private static void displayCredits() {
     String[] credits = {
         "Denis Kovtun",
