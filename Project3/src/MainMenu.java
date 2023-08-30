@@ -51,6 +51,12 @@ public class MainMenu {
     return null;
   }
 
+  /**
+   * Возвращает список загруженных сохранений из файла.
+   *
+   * @param save Флаг, указывающий на необходимость сохранения.
+   * @return Список загруженных сохранений.
+   */
   public static Scanner scanner = new Scanner(System.in);
 
   public static List<Buratino> getSaveToFile(boolean save) {
@@ -105,9 +111,9 @@ public class MainMenu {
   }
 
   /**
-   * Выводит информацию о врагах на экран для выбора битвы.
+   * Сохраняет игру, указывая имя сохранения.
    *
-   * @param chouse источник данных
+   * @param "saveName" Имя сохранения игры.
    */
   public static void saveGame() {
     String saveName;
@@ -117,6 +123,11 @@ public class MainMenu {
     addSaveToFile(saveName);
   }
 
+  /**
+   * Добавляет сохранение в файл.
+   *
+   * @param "res/Save.csv" Имя сохранения.
+   */
   public static void addSaveToFile(String name) {
     List<Buratino> allSave = getSaveToFile(false);
     Buratino buratinoSave;
@@ -136,7 +147,11 @@ public class MainMenu {
     }
   }
 
-
+  /**
+   * Выводит информацию о врагах, доступных для сражения, и предоставляет выбор.
+   *
+   * @param chouse Сканнер для выбора врага.
+   */
   public static void enemiesInfo(Scanner chouse) {
     List<Enemies> enemies = getEnemiesFromFile();
     System.out.println("Выберите врага для сражения:");
