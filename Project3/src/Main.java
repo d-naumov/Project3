@@ -1,5 +1,6 @@
 import EnumPackage.EnumMainMenu;
 import EnumPackage.EnumShop;
+
 import java.util.Scanner;
 
 public class Main {
@@ -8,7 +9,6 @@ public class Main {
   public static final int EXIT = 3;
 
   public static void main(String[] args) {
-    runNewGameMessage();
     StartNewGameMenu();
   }
 
@@ -18,10 +18,14 @@ public class Main {
       int menu = readCommand(scanner);
       switch (menu) {
         case NEW_GAME -> {
+          runNewGameMessage();
           System.out.println("Начинаем новую игру. Выберите ваши действия!");
+          MainMenu.checkMainHero(true);
           startMenu();
         }
         case LOAD_GAME -> {
+          MainMenu.checkMainHero(false);
+          startMenu();
           // Load game logic
         }
         case EXIT -> {
@@ -71,7 +75,7 @@ public class Main {
         }
         case INFORMATION ->
           //Надо добавить
-            System.out.println(MainMenu.buratino.toString());
+                System.out.println(MainMenu.buratino.toString());
         case EXIT -> {
           return;
         }
