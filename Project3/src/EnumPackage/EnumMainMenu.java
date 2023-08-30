@@ -7,6 +7,7 @@ public enum EnumMainMenu {
   FIGHTING("Сражение"),
   SHOP("Магазин"),
   INFORMATION("Информация о персонаже"),
+  SAVE("Сохранить игру"),
   EXIT("Выход");
   private final String message;
 
@@ -35,6 +36,8 @@ public enum EnumMainMenu {
       case "3":
         return INFORMATION;
       case "4":
+        return SAVE;
+      case "5":
         return EXIT;
       default:
         return UNEXPECTED;

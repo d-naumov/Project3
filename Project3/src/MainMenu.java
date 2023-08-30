@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -22,6 +23,23 @@ public class MainMenu {
   }
 
   public static Buratino loadGame() {
+    String LoadChose;
+    List<Buratino> allLoads = getSaveToFile(true);
+    Scanner scanner1 = new Scanner(System.in);
+    System.out.println("Введите имя вашего сохранения");
+    LoadChose = scanner1.next();
+    for (int i = 0; i < allLoads.size(); i++) {
+      if (allLoads.get(i).getName().equalsIgnoreCase(LoadChose)) {
+        return allLoads.get(i);
+      }
+    }
+    return null;
+  }
+
+  public static Scanner scanner = new Scanner(System.in);
+
+  public static List<Buratino> getSaveToFile(boolean save) {
+    boolean saveNew = save;
     List<Buratino> allLoads = new ArrayList<>();
     String loadName;
     String LoadChose;
@@ -36,21 +54,13 @@ public class MainMenu {
       String[] data = line.split(",");
       loadName = data[0];
       allLoads.add(new Buratino(data[0], Integer.parseInt(data[1]), Integer.parseInt(data[2]),
-          Integer.parseInt(data[3])));
-      System.out.println(data[0]);
+              Integer.parseInt(data[3])));
+      if (saveNew) System.out.println(data[0]);
     }
-    Scanner scanner1 = new Scanner(System.in);
-    System.out.println("Введите имя вашего сохранения");
-    LoadChose = scanner1.next();
-    for (int i = 0; i < allLoads.size(); i++) {
-      if (allLoads.get(i).getName().equalsIgnoreCase(LoadChose)) {
-        return allLoads.get(i);
-      }
-    }
-    return null;
+    return allLoads;
   }
 
-  public static Scanner scanner = new Scanner(System.in);
+
 
   public static List<Enemies> getEnemiesFromFile() {
     File enemiesFile = new File("res/Enemies.csv");
@@ -71,6 +81,33 @@ public class MainMenu {
       throw new RuntimeException(e);
     }
     return enemies;
+  }
+
+  public static void saveGame() {
+    String saveName;
+    System.out.println("Сохранить игру как...");
+    System.out.println("Укажите имя");
+    saveName = scanner.next();
+    addSaveToFile(saveName);
+  }
+
+  public static void addSaveToFile(String name) {
+    List<Buratino> allSave = getSaveToFile(false);
+    Buratino buratinoSave;
+    buratinoSave = buratino;
+    buratinoSave.setName(name);
+    allSave.add(buratinoSave);
+    try {
+      PrintWriter writer;
+      writer = new PrintWriter("res/Save.csv");
+      for (Buratino save : allSave) {
+        writer.println(save.toStringFromFile());
+      }
+      writer.close();
+    } catch (Exception e) {
+      System.out.println("Файл не найден: " + e.getMessage());
+      e.printStackTrace();
+    }
   }
 
 

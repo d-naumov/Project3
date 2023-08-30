@@ -76,6 +76,9 @@ public class Main {
         case INFORMATION ->
           //Надо добавить
                 System.out.println(MainMenu.buratino.toString());
+        case SAVE -> {
+          MainMenu.saveGame();
+        }
         case EXIT -> {
           return;
         }

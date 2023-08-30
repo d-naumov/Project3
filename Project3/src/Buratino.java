@@ -68,6 +68,10 @@ public class Buratino {
             money -= amount;
         }
     }
+
+    public String toStringFromFile() {
+        return this.getName() + "," + this.getHealth() + "," + this.getStrength() + "," + this.getMoney();
+    }
     @Override
     public String toString() {
         return "Buratino{" +
