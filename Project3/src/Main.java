@@ -1,27 +1,22 @@
 import EnumPackage.EnumMainMenu;
 import EnumPackage.EnumShop;
-
 import EnumPackage.EnumStartMenu;
+
 import java.util.Scanner;
 
 public class Main {
   public static void main(String[] args) {
-    System.out.println("--------------------------------------------------------------------");
-    System.out.println("Привет Буратино! Мы тебя так долго ждали, нам нужна твоя помощь. ");
-    System.out.println("  Хотим начать игру, где ты будешь главным героем.");
-    System.out.println("     Тебе нужно будет сразиться с неприятелем.");
-    System.out.println("     Победи и получишь \"Золотой ключик\".");
-    System.out.println("---------------------------------------------------------------------");
-    firstMenu();
-
+    StartNewGameMenu();
   }
-  public static void firstMenu(){
+
+  public static void StartNewGameMenu() {
     Scanner scanner = new Scanner(System.in);
     while (true) {
       EnumStartMenu menu = EnumStartMenu.readCommand(scanner);
       switch (menu) {
         case NEW_GAME -> {
           System.out.println("Начинаем новую игру. Выберите ваши действия!");
+          runNewGameMessage();
           startMenu();
         }
         case LOAD_GAME -> {
@@ -34,6 +29,17 @@ public class Main {
       }
     }
   }
+
+  public static void runNewGameMessage() {
+    System.out.println("--------------------------------------------------------------------");
+    System.out.println("Привет Буратино! Мы тебя так долго ждали, нам нужна твоя помощь. ");
+    System.out.println("  Хотим начать игру, где ты будешь главным героем.");
+    System.out.println("     Тебе нужно будет сразиться с неприятелем.");
+    System.out.println("     Победи и получишь \"Золотой ключик\".");
+    System.out.println("---------------------------------------------------------------------");
+  }
+
+
 
   public static void startMenu() {
     Scanner scanner = new Scanner(System.in);
