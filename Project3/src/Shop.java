@@ -11,13 +11,11 @@ public class Shop {
     Item abc = new Item("ABC Book", 40, 0, 3);
     Item handOrgan = new Item("Hand-Organ", 50, 50, 0);
     Item log = new Item("Log", 100, 0, 10);
-    Item goldenKey = new Item("Golden Key", 10000, 100, 0);
     List<Item> items = new ArrayList<>();
     items.add(onion);
     items.add(abc);
     items.add(handOrgan);
     items.add(log);
-    items.add(goldenKey);
 
     System.out.println("Welcome to our store!");
     System.out.println("You have " + buratino.getMoney() + " coins");
@@ -25,7 +23,7 @@ public class Shop {
     // Print existing products
     for (int i = 0; i < items.size(); i++) {
       System.out.print(
-          i + 1 + ". Buy " + items.get(i).getName() + ". Price - " + items.get(i).getPrice());
+          i + 1 + ". " + items.get(i).getName() + ". Price - " + items.get(i).getPrice());
       if (items.get(i).getIncreaseHealth() > 0) {
         System.out.println(". Increases health by " + items.get(i).getIncreaseHealth());
       } else {
@@ -43,11 +41,11 @@ public class Shop {
       if (onion.getIncreaseHealth() > 0) {
         MainMenu.buratino.setHealth(
             MainMenu.buratino.getHealth() + items.get(choice - 1).getIncreaseHealth());
-        // int newHealth = MainMenu.buratino.getHealth() + items.get(choice - 1).getIncreaseHealth());
-        // System.out.println("You health is now " + newHealth);
+        System.out.println("You health is now " + MainMenu.buratino.getHealth());
       } else {
         MainMenu.buratino.setStrength(
             MainMenu.buratino.getStrength() + items.get(choice - 1).getIncreaseStrength());
+        System.out.println("You strength is now " + MainMenu.buratino.getStrength());
       }
     }
   }
