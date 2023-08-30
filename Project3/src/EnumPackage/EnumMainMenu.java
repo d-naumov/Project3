@@ -10,6 +10,9 @@ public enum EnumMainMenu {
   EXIT("Выход");
   private final String message;
 
+  /**
+   * Перечисление для главного меню с доступными опциями.
+   */
   EnumMainMenu(String message) {
     this.message = message;
   }
@@ -18,7 +21,12 @@ public enum EnumMainMenu {
     return message;
   }
 
-
+  /**
+   * Считывание команды из сканнера и преобразование в соответствующий EnumMainMenu.
+   *
+   * @param scanner источник данных
+   * @return выбранная команда главного меню
+   */
   public static EnumMainMenu readCommand(Scanner scanner) {
     printMenu();
     System.out.println("Введите команду");
@@ -42,7 +50,7 @@ public enum EnumMainMenu {
   }
 
   /**
-   * Метод выводит меню в консоль
+   * Вывод меню главного меню в консоль.
    */
   public static void printMenu() {
     for (EnumMainMenu menu : values()) {
@@ -51,5 +59,4 @@ public enum EnumMainMenu {
       }
     }
   }
-
 }

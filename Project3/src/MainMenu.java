@@ -11,16 +11,31 @@ public class MainMenu {
 
   public static Buratino buratino;
 
+  /**
+   * Проверяет состояние игры и создает объект главного героя.
+   *
+   * @param gameNew флаг новой игры
+   */
   public static void checkMainHero(Boolean gameNew) {
     newGame = gameNew;
     buratino = newGame ? startNew() : loadGame();
   }
 
+  /**
+   * Создает нового главного героя с начальными характеристиками.
+   *
+   * @return объект главного героя
+   */
   public static Buratino startNew() {
     Buratino buratino = new Buratino("Buratino", 180, 22, 10);
     return buratino;
   }
 
+  /**
+   * Загружает данные главного героя из файла сохранения.
+   *
+   * @return объект главного героя с загруженными данными
+   */
   public static Buratino loadGame() {
     List<Buratino> allLoads = new ArrayList<>();
     String loadName;
@@ -52,6 +67,12 @@ public class MainMenu {
 
   public static Scanner scanner = new Scanner(System.in);
 
+  /**
+   * Читает информацию о врагах из файла "Enemies.csv" и возвращает список врагов.
+   *
+   * @return список врагов, прочитанных из файла
+   * @throws RuntimeException если возникла ошибка при чтении файла
+   */
   public static List<Enemies> getEnemiesFromFile() {
     File enemiesFile = new File("res/Enemies.csv");
     List<Enemies> enemies = new ArrayList<>();
@@ -73,7 +94,11 @@ public class MainMenu {
     return enemies;
   }
 
-
+  /**
+   * Выводит информацию о врагах на экран для выбора битвы.
+   *
+   * @param chouse источник данных
+   */
   public static void enemiesInfo(Scanner chouse) {
     List<Enemies> enemies = getEnemiesFromFile();
     System.out.println("Выберите врага для сражения:");
@@ -85,6 +110,12 @@ public class MainMenu {
     }
     enemyToFight(chouse);
   }
+
+  /**
+   * Считывает выбор пользователя о сражении с врагом.
+   *
+   * @param scanner источник данных
+   */
   public static void enemyToFight(Scanner scanner) {
     if (scanner.hasNextInt()) {
       int index = scanner.nextInt();
@@ -95,6 +126,11 @@ public class MainMenu {
     }
   }
 
+  /**
+   * Метод осуществляет сражение между главным героем и выбранным врагом.
+   *
+   * @param choice выбранный враг для сражения
+   */
   private static void fight(int choice) {
     List<Enemies> enemies = getEnemiesFromFile();
 
@@ -143,14 +179,35 @@ public class MainMenu {
     }
   }
 
+  /**
+   * Вычисляет атаку главного героя.
+   *
+   * @param buratinoStrength сила главного героя
+   * @param random           объект для генерации случайных чисел
+   * @return значение атаки главного героя
+   */
   private static int calculateBuratinoAttack(int buratinoStrength, Random random) {
     return buratinoStrength + random.nextInt(5);
   }
 
+  /**
+   * Вычисляет атаку врага.
+   *
+   * @param enemyStrength сила врага
+   * @param random        объект для генерации случайных чисел
+   * @return значение атаки врага
+   */
   private static int calculateEnemyAttack(int enemyStrength, Random random) {
     return enemyStrength + random.nextInt(5);
   }
 
+  /**
+   * Осуществляет атаки между главным героем и врагом.
+   *
+   * @param selectedEnemy  выбранный враг
+   * @param buratinoAttack атака главного героя
+   * @param enemyAttack    атака врага
+   */
   private static void performAttacks(Enemies selectedEnemy, int buratinoAttack, int enemyAttack) {
     selectedEnemy.decreaseHealth(buratinoAttack);
     buratino.decreaseHealth(enemyAttack);
@@ -159,10 +216,22 @@ public class MainMenu {
     System.out.println("Враг нанес вам " + enemyAttack + " урона.");
   }
 
+  /**
+   * Генерирует случайную награду для героя после победы.
+   *
+   * @param random объект для генерации случайных чисел
+   * @return случайное значение награды
+   */
   private static int generateReward(Random random) {
     return random.nextInt(10, 20);
   }
 
+  /**
+   * Выводит сообщение о победе и обработку награды.
+   *
+   * @param reward количество награды
+   * @param enemy  враг, побежденный героем
+   */
   private static void displayVictoryMessage(int reward, Enemies enemy) {
     if (enemy.getName().equals("Karabas-Barabas")) {
       displayKarabasVictoryMessage();
@@ -172,6 +241,10 @@ public class MainMenu {
       System.out.println("Вы получили " + reward + " монет.");
     }
   }
+
+  /**
+   * Отображает сообщение о победе над страшным Карабас-Барабасом и список кредитов.
+   */
   private static void displayKarabasVictoryMessage() {
     String text = "You have defeated the fearsome Karabas-Barabas.\n"
         + "You received the Golden Key and opened the secret room\n" +
@@ -199,6 +272,9 @@ public class MainMenu {
     System.exit(0);
   }
 
+  /**
+   * Отображение списка
+   */
   private static void displayCredits() {
     String[] credits = {
         "Denis Kovtun",
