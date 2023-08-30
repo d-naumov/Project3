@@ -67,6 +67,12 @@ public class MainMenu {
 
   public static Scanner scanner = new Scanner(System.in);
 
+  /**
+   * Читает информацию о врагах из файла "Enemies.csv" и возвращает список врагов.
+   *
+   * @return список врагов, прочитанных из файла
+   * @throws RuntimeException если возникла ошибка при чтении файла
+   */
   public static List<Enemies> getEnemiesFromFile() {
     File enemiesFile = new File("res/Enemies.csv");
     List<Enemies> enemies = new ArrayList<>();
