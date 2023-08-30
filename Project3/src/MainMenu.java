@@ -196,6 +196,7 @@ public class MainMenu {
     displayCredits();
     System.out.println("  Artists");
     displayCredits();
+    System.exit(0);
   }
 
   private static void displayCredits() {
