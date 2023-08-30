@@ -51,6 +51,12 @@ public class MainMenu {
     return null;
   }
 
+  /**
+   * Возвращает список загруженных сохранений из файла.
+   *
+   * @param save Флаг, указывающий на необходимость сохранения.
+   * @return Список загруженных сохранений.
+   */
   public static Scanner scanner = new Scanner(System.in);
 
   public static List<Buratino> getSaveToFile(boolean save) {
