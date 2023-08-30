@@ -13,6 +13,22 @@ public class Item {
     this.increaseStrength = increaseStrength;
   }
 
+  public String getName() {
+    return name;
+  }
+
+  public int getPrice() {
+    return price;
+  }
+
+  public int getIncreaseHealth() {
+    return increaseHealth;
+  }
+
+  public int getIncreaseStrength() {
+    return increaseStrength;
+  }
+
   @Override
   public String toString() {
     return "Item{" +
