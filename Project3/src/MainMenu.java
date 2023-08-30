@@ -75,8 +75,6 @@ public class MainMenu {
     return allLoads;
   }
 
-
-
   /**
    * Читает информацию о врагах из файла "Enemies.csv" и возвращает список врагов.
    *
