@@ -50,6 +50,13 @@ public class Buratino {
         health -= amount;
     }
 
+    public void increaseHealth(int amount) {
+        health += amount;
+    }
+
+    public void increaseStrength(int amount) {
+        strength += amount;
+    }
     public void increaseMoney(int amount) {
         money += amount;
     }
