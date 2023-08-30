@@ -1,6 +1,5 @@
 import EnumPackage.EnumMainMenu;
 import EnumPackage.EnumShop;
-
 import java.util.Scanner;
 
 public class Main {
@@ -19,7 +18,7 @@ public class Main {
       switch (menu) {
         case NEW_GAME -> {
           runNewGameMessage();
-          System.out.println("Начинаем новую игру. Выберите ваши действия!");
+          System.out.println("Starting a new game. Choose Your Actions!");
           MainMenu.checkMainHero(true);
           startMenu();
         }
@@ -31,15 +30,15 @@ public class Main {
         case EXIT -> {
           return;
         }
-        default -> System.out.println("Некорректная команда");
+        default -> System.out.println("Incorrect command");
       }
     }
   }
   public static int readCommand(Scanner scanner) {
     printMenu();
-    System.out.println("Вы хотите начать игру сначала или загрузить ");
+    System.out.println("Do you want to start a new game over or load saved game?");
     if (!scanner.hasNext()) {
-      throw new RuntimeException("Ожидается ввод команды");
+      throw new RuntimeException("Waiting for a command");
     }
     String input = scanner.next();
     scanner.nextLine();
@@ -56,10 +55,10 @@ public class Main {
   }
   public static void runNewGameMessage() {
     System.out.println("--------------------------------------------------------------------");
-    System.out.println("Привет Буратино! Мы тебя так долго ждали, нам нужна твоя помощь. ");
-    System.out.println("  Хотим начать игру, где ты будешь главным героем.");
-    System.out.println("     Тебе нужно будет сразиться с неприятелем.");
-    System.out.println("     Победи и получишь \"Золотой ключик\".");
+    System.out.println("Hi Buratino! We've been waiting for you for so long, we need your help.");
+    System.out.println("    We want to start a game where you will be the main character.");
+    System.out.println("                You will need to fight the enemy.");
+    System.out.println("                 Win and get the \"Golden Key\".");
     System.out.println("---------------------------------------------------------------------");
   }
   public static void startMenu() {
@@ -79,13 +78,13 @@ public class Main {
         case EXIT -> {
           return;
         }
-        default -> System.out.println("Некорректная команда");
+        default -> System.out.println("Incorrect command");
       }
     }
   }
   public static void printMenu() {
-    System.out.println("1. Начать новую игру");
-    System.out.println("2. Загрузить игру");
-    System.out.println("3. Выход");
+    System.out.println("1. Start a new game");
+    System.out.println("2. Download game");
+    System.out.println("3. Exit");
   }
 }
