@@ -29,6 +29,11 @@ public class Enemies {
         return money;
     }
 
+    /**
+     * Уменьшает количество здоровья игрока на указанное значение.
+     *
+     * @param amount количество здоровья для уменьшения
+     */
     public void decreaseHealth(int amount) {
         health -= amount;
     }

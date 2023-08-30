@@ -3,9 +3,7 @@ public class Buratino {
     private String name;
     private int health;
     private int strength;
-
     private int money;
-
 
     public Buratino(String name, int health, int strength, int money) {
         this.name = name;
@@ -61,6 +59,11 @@ public class Buratino {
         money += amount;
     }
 
+    /**
+     * Уменьшает количество денег игрока на указанное значение, если возможно.
+     *
+     * @param amount сумма для уменьшения
+     */
     public void decreaseMoney(int amount) {
         if (amount > money) {
             System.out.println("Недостаточно денег.");
