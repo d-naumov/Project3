@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public enum EnumFighting {
   UNEXPECTED(""),
-  SELECTION("Выбор соперника"),
-  EXIT("Выход");
+  SELECTION("Opponent's choice"),
+  EXIT("Exit");
   private final String message;
 
   EnumFighting(String message) {
@@ -18,9 +18,9 @@ public enum EnumFighting {
 
   public static EnumFighting readCommand(Scanner scanner) {
     printMenu();
-    System.out.println("Введите команду");
+    System.out.println("Input the command");
     if (!scanner.hasNext()) {
-      throw new RuntimeException("Ожидается ввод команды");
+      throw new RuntimeException("Awaiting for an input of the command");
     }
     String input = scanner.next();
     scanner.nextLine();
@@ -35,7 +35,7 @@ public enum EnumFighting {
   }
 
   /**
-   * Метод выводит меню в консоль
+   * Method prints a menu to the console
    */
   public static void printMenu() {
     for (EnumFighting fighting : values()) {
