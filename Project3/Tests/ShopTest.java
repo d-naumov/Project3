@@ -1,6 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayInputStream;
+import java.io.StringReader;
 import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
@@ -9,8 +9,8 @@ public class ShopTest {
   @Test
   public void testIncreaseHealthOnValidPurchase() {
     Buratino buratino = new Buratino("Buratino", 100, 20, 10);
-    ByteArrayInputStream input = new ByteArrayInputStream("1\n".getBytes());
-    Scanner scanner = new Scanner(input);
+    String input = "1\n"; // Строка, которую пользователь вводит
+    Scanner scanner = new Scanner(new StringReader(input));
 
     // Тестирование покупки предмета, который увеличивает здоровье
     Shop.selection(buratino, scanner);
@@ -22,8 +22,8 @@ public class ShopTest {
   @Test
   public void testIncreaseStrengthOnValidPurchase() {
     Buratino buratino = new Buratino("Buratino", 100, 20, 10);
-    ByteArrayInputStream input = new ByteArrayInputStream("2\n".getBytes());
-    Scanner scanner = new Scanner(input);
+    String input = "2\n"; // Строка, которую пользователь вводит
+    Scanner scanner = new Scanner(new StringReader(input));
 
     // Тестирование покупки предмета, который увеличивает силу
     Shop.selection(buratino, scanner);
@@ -34,35 +34,36 @@ public class ShopTest {
 
   @Test
   public void testDecreaseMoneyOnValidPurchase() {
-    Buratino buratino = new Buratino("Buratino", 100, 20, 10);
-    ByteArrayInputStream input = new ByteArrayInputStream("1\n".getBytes());
-    Scanner scanner = new Scanner(input);
+    Buratino buratino = new Buratino("Buratino", 100, 20, 20);
+    String input = "1\n"; // Строка, которую пользователь вводит
+    Scanner scanner = new Scanner(new StringReader(input));
 
     // Тестирование уменьшения денег при покупке
     Shop.selection(buratino, scanner);
 
     // Проверка, что деньги уменьшились на 10
-    assertEquals(0, buratino.getMoney());
+    assertEquals(10, buratino.getMoney());
   }
 
   @Test
   public void testInsufficientFunds() {
     Buratino buratino = new Buratino("Buratino", 180, 22, 10);
-    ByteArrayInputStream input = new ByteArrayInputStream("1\n".getBytes());
-    Scanner scanner = new Scanner(input);
+    String input = "2\n"; // Строка, которую пользователь вводит
+    Scanner scanner = new Scanner(new StringReader(input));
 
     // Тестирование покупки без достаточных средств
     Shop.selection(buratino, scanner);
 
     // Проверка, что деньги не изменились
-    assertEquals(0, buratino.getMoney());
+    assertEquals(10, buratino.getMoney());
   }
+
 
   @Test
   public void testInvalidInput() {
     Buratino buratino = new Buratino("Buratino", 100, 20, 50);
-    ByteArrayInputStream input = new ByteArrayInputStream("invalid\n".getBytes());
-    Scanner scanner = new Scanner(input);
+    String input = "invalid\n"; // Строка, которую пользователь вводит
+    Scanner scanner = new Scanner(new StringReader(input));
 
     // Тестирование некорректного ввода данных пользователем
     Shop.selection(buratino, scanner);

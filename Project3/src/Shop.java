@@ -32,7 +32,7 @@ public class Shop {
       }
     } else {
       System.out.println("Invalid input. Exiting the shop.");
-      scanner.nextLine(); // Clear input buffer
+      scanner.nextLine();
     }
   }
 
