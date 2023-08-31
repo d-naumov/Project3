@@ -12,7 +12,7 @@ public class Main {
   }
 
   /**
-   * Метод, представляющий главное меню игры
+   * Method representing the main menu of the game
    */
   public static void StartNewGameMenu() {
     Scanner scanner = new Scanner(System.in);
@@ -40,11 +40,11 @@ public class Main {
   }
 
   /**
-   * Считывает команду из сканнера и возвращает соответствующий код команды.
+   * Reads a command from the scanner and returns the corresponding command code.
    *
-   * @param scanner источник данных для ввода команды
-   * @return код команды (NEW_GAME, LOAD_GAME, EXIT)
-   * или -1 в случае некорректной команды (UNEXPECTED)
+   * @param scanner data source for command input
+   * @return command code (NEW_GAME, LOAD_GAME, EXIT) or -1 in case of incorrect command
+   * (UNEXPECTED)
    */
   public static int readCommand(Scanner scanner) {
     printMenu();
@@ -67,7 +67,7 @@ public class Main {
   }
 
   /**
-   * Метод для вывода сообщения при начале новой игры.
+   * Method for displaying a message when starting a new game.
    */
   public static void runNewGameMessage() {
     System.out.println("--------------------------------------------------------------------");
@@ -79,19 +79,19 @@ public class Main {
   }
 
   /**
-   * Метод для вывода сообщения при загрузке игры.
+   * Method for displaying a message when loading a game.
    */
-  public static void loadGameMessage(){
+  public static void loadGameMessage() {
     System.out.println("----------------------------------------------------------");
-    System.out.println("     Добро пожаловать опять в игру Буратино! ");
-    System.out.println("  Мы верим в тебя попробуй одолеть Крабаса-Барабаса.");
+    System.out.println("     Welcome back to the Buratino game! ");
+    System.out.println("  We believe in you, try to defeat Karabas-Barabas.");
     System.out.println("----------------------------------------------------------");
   }
 
   /**
-   * Метод для отображения меню действий во время игры.
-   * В зависимости от выбора пользователя вызывает методы для сражения с врагами,
-   * посещения магазина, просмотра информации о персонаже или выхода из игры.
+   * Method for displaying the action menu during the game. Depending on the user's choice, calls
+   * methods for fighting enemies. Visiting the store, viewing character information, or exiting the
+   * game.
    */
   public static void startMenu() {
     Scanner scanner = new Scanner(System.in);
@@ -119,7 +119,7 @@ public class Main {
   }
 
   /**
-   *  Метод для вывода главного меню игры
+   * Method for printing the main menu of the game
    */
   public static void printMenu() {
     System.out.println("1. Start a new game");
