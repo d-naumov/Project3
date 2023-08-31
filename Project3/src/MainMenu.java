@@ -13,9 +13,9 @@ public class MainMenu {
   public static Buratino buratino;
 
   /**
-   * Проверяет состояние игры и создает объект главного героя.
+   * Checks the game's condition and create's the object of the main character.
    *
-   * @param gameNew флаг новой игры
+   * @param gameNew Flag of the new game
    */
   public static void checkMainHero(Boolean gameNew) {
     newGame = gameNew;
@@ -23,9 +23,9 @@ public class MainMenu {
   }
 
   /**
-   * Создает нового главного героя с начальными характеристиками.
+   * Creates a new main character with initial settings
    *
-   * @return объект главного героя
+   * @return the object of the new character
    */
   public static Buratino startNew() {
     Buratino buratino = new Buratino("Buratino", 180, 22, 10);
@@ -33,15 +33,16 @@ public class MainMenu {
   }
 
   /**
-   * Загружает данные главного героя из файла сохранения.
+   * Загружает данные главного героя из файла сохранения. Loads the main heroes data from the saving
+   * file
    *
-   * @return объект главного героя с загруженными данными
+   * @return The object of the main character with the loaded data
    */
   public static Buratino loadGame() {
     String LoadChose;
     List<Buratino> allLoads = getSaveToFile(true);
     Scanner scanner1 = new Scanner(System.in);
-    System.out.println("Введите имя вашего сохранения");
+    System.out.println("Name your saving");
     LoadChose = scanner1.next();
     for (int i = 0; i < allLoads.size(); i++) {
       if (allLoads.get(i).getName().equalsIgnoreCase(LoadChose)) {
@@ -52,10 +53,10 @@ public class MainMenu {
   }
 
   /**
-   * Возвращает список загруженных сохранений из файла.
+   * returns the list of loaded savings from the file.
    *
-   * @param save Флаг, указывающий на необходимость сохранения.
-   * @return Список загруженных сохранений.
+   * @param save Flag indicating the necessity of saving.
+   * @return List of the loaded savings.
    */
   public static Scanner scanner = new Scanner(System.in);
 
@@ -84,10 +85,10 @@ public class MainMenu {
   }
 
   /**
-   * Читает информацию о врагах из файла "Enemies.csv" и возвращает список врагов.
+   * Reads the information about the enemies from the file "Enemies.csv" and returns the list of the enemies.
    *
-   * @return список врагов, прочитанных из файла
-   * @throws RuntimeException если возникла ошибка при чтении файла
+   * @return List of the enemies, read from the file
+   * @throws RuntimeException  in case the error occures while reading from the file
    */
   public static List<Enemies> getEnemiesFromFile() {
     File enemiesFile = new File("res/Enemies.csv");
@@ -111,22 +112,22 @@ public class MainMenu {
   }
 
   /**
-   * Сохраняет игру, указывая имя сохранения.
+   * Saves the game indicating the name of the game.
    *
-   * @param "saveName" Имя сохранения игры.
+   * @param "saveName" the name of the game's saving.
    */
   public static void saveGame() {
     String saveName;
-    System.out.println("Сохранить игру как...");
-    System.out.println("Укажите имя");
+    System.out.println("Save game as...");
+    System.out.println("Indicate the name");
     saveName = scanner.next();
     addSaveToFile(saveName);
   }
 
   /**
-   * Добавляет сохранение в файл.
+   * Adds the saving in the file
    *
-   * @param "res/Save.csv" Имя сохранения.
+   * @param "res/Save.csv" Name of the saving.
    */
   public static void addSaveToFile(String name) {
     List<Buratino> allSave = getSaveToFile(false);
@@ -142,59 +143,59 @@ public class MainMenu {
       }
       writer.close();
     } catch (Exception e) {
-      System.out.println("Файл не найден: " + e.getMessage());
+      System.out.println("The file not found: " + e.getMessage());
       e.printStackTrace();
     }
   }
 
   /**
-   * Выводит информацию о врагах, доступных для сражения, и предоставляет выбор.
+   * Prints the information of the enemies available for a battle, and provides a choice.
    *
-   * @param chouse Сканнер для выбора врага.
+   * @param choice scanner for selecting an enemy.
    */
-  public static void enemiesInfo(Scanner chouse) {
+  public static void enemiesInfo(Scanner choice) {
     List<Enemies> enemies = getEnemiesFromFile();
-    System.out.println("Выберите врага для сражения:");
+    System.out.println("Choose the enemy for a battle:");
     for (int i = 0; i < enemies.size(); i++) {
       System.out.println(
           (i + 1) + ". " + enemies.get(i).getName() + ": Health " + enemies.get(i).getHealth()
               + ", Strength " + enemies.get(i)
               .getStrength() + ", Money " + enemies.get(i).getMoney());
     }
-    enemyToFight(chouse);
+    enemyToFight(choice);
   }
 
   /**
-   * Считывает выбор пользователя о сражении с врагом.
+   * Reads out  the choice of a user about the battle with an enemy.
    *
-   * @param scanner источник данных
+   * @param scanner is data source
    */
   public static void enemyToFight(Scanner scanner) {
     if (scanner.hasNextInt()) {
       int index = scanner.nextInt();
       fight(index);
     } else {
-      System.out.println("Некорректный ввод. Введите число.");
-      scanner.nextLine(); // Очистить буфер ввода
+      System.out.println("Incorrect input. Enter the number.");
+      scanner.nextLine(); // clear input buffer
     }
   }
 
   /**
-   * Метод осуществляет сражение между главным героем и выбранным врагом.
+   * Method realises the battle between the main character and the enemy.
    *
-   * @param choice выбранный враг для сражения
+   * @param choice chousen enemy for a battle
    */
   private static void fight(int choice) {
     List<Enemies> enemies = getEnemiesFromFile();
 
     if (choice < 1 || choice > enemies.size()) {
-      System.out.println("Некорректный выбор врага.");
+      System.out.println("Incorrect choice of the enemy.");
       return;
     }
 
     Enemies selectedEnemy = enemies.get(choice - 1);
-    System.out.println("Вы выбрали сражаться с " + selectedEnemy.getName() + "!");
-    System.out.println("Начинается битва...");
+    System.out.println("You chose a battle with " + selectedEnemy.getName() + "!");
+    System.out.println("The battle is starting...");
 
     Random random = new Random();
 
@@ -224,7 +225,7 @@ public class MainMenu {
     }
 
     if (buratino.getHealth() <= 0) {
-      System.out.println("Вы проиграли битву.");
+      System.out.println("You lost the battle");
       System.exit(0);
     } else {
       int reward = generateReward(random);
@@ -233,65 +234,65 @@ public class MainMenu {
   }
 
   /**
-   * Вычисляет атаку главного героя.
+   * Calculates the main characters attack.
    *
-   * @param buratinoStrength сила главного героя
-   * @param random           объект для генерации случайных чисел
-   * @return значение атаки главного героя
+   * @param buratinoStrength  the main character strength
+   * @param random object  for generation random numbers
+   * @return main character's attack value
    */
   private static int calculateBuratinoAttack(int buratinoStrength, Random random) {
     return buratinoStrength + random.nextInt(5);
   }
 
   /**
-   * Вычисляет атаку врага.
+   * Calculates the enemies attack.
    *
-   * @param enemyStrength сила врага
-   * @param random        объект для генерации случайных чисел
-   * @return значение атаки врага
+   * @param enemyStrength strength of the enemy
+   * @param random        object  for generation random numbers
+   * @return enemy's attack value
    */
   private static int calculateEnemyAttack(int enemyStrength, Random random) {
     return enemyStrength + random.nextInt(5);
   }
 
   /**
-   * Осуществляет атаки между главным героем и врагом.
+   * Performs attacks between the main character and the enemy..
    *
-   * @param selectedEnemy  выбранный враг
-   * @param buratinoAttack атака главного героя
-   * @param enemyAttack    атака врага
+   * @param selectedEnemy  chosen enemy
+   * @param buratinoAttack main character attack
+   * @param enemyAttack    enemy attack
    */
   private static void performAttacks(Enemies selectedEnemy, int buratinoAttack, int enemyAttack) {
     selectedEnemy.decreaseHealth(buratinoAttack);
     buratino.decreaseHealth(enemyAttack);
 
-    System.out.println("Вы нанесли врагу " + buratinoAttack + " урона.");
-    System.out.println("Враг нанес вам " + enemyAttack + " урона.");
+    System.out.println("You dealt enemy " + buratinoAttack + " damage.");
+    System.out.println("Enemy dealt you " + enemyAttack + " damage.");
   }
 
   /**
-   * Генерирует случайную награду для героя после победы.
+   * Generates a random reward for a character upon victory.
    *
-   * @param random объект для генерации случайных чисел
-   * @return случайное значение награды
+   * @param random object for generating random numbers
+   * @return random reward value
    */
   private static int generateReward(Random random) {
     return random.nextInt(10, 20);
   }
 
   /**
-   * Выводит сообщение о победе и обработку награды.
+   * Displays a victory message and reward processing.
    *
-   * @param reward количество награды
-   * @param enemy  враг, побежденный героем
+   * @param reward amount of reward
+   * @param enemy  enemy defeated by the hero
    */
   private static void displayVictoryMessage(int reward, Enemies enemy) {
     if (enemy.getName().equals("Karabas-Barabas")) {
       displayKarabasVictoryMessage();
     } else {
-      System.out.println("Вы победили врага!");
+      System.out.println("You defeated the enemy!");
       buratino.increaseMoney(reward);
-      System.out.println("Вы получили " + reward + " монет.");
+      System.out.println("You received " + reward + " coins.");
     }
   }
 
@@ -309,15 +310,15 @@ public class MainMenu {
         e.printStackTrace();
       }
     }
-    System.out.println("  Credits");
+    System.out.println("   Credits");
     displayCredits();
-    System.out.println(" Producers");
+    System.out.println("  Producers");
     displayCredits();
-    System.out.println(" Desiners");
+    System.out.println("  Designers");
     displayCredits();
     System.out.println(" Programmers");
     displayCredits();
-    System.out.println("  Artists");
+    System.out.println("   Artists");
     displayCredits();
     System.exit(0);
   }
