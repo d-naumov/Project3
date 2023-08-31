@@ -60,9 +60,9 @@ public class Buratino {
     }
 
     /**
-     * Уменьшает количество денег игрока на указанное значение, если возможно.
+     * Reduces the main character's amount of money by the specified value, if possible.
      *
-     * @param amount сумма для уменьшения
+     * @param amount amount to decrease
      */
     public void decreaseMoney(int amount) {
         if (amount > money) {
