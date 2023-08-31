@@ -9,10 +9,10 @@ public class Shop {
   private static final String STRENGTH = "Strength";
 
   /**
-   * Выбор товара и процесс покупки в магазине.
+   * Item selection and shopping process in the store.
    *
-   * @param buratino главный герой
-   * @param scanner источник данных
+   * @param buratino main character.
+   * @param scanner  data source.
    */
   public static void selection(Buratino buratino, Scanner scanner) {
     List<Item> items = createItems();
@@ -37,9 +37,9 @@ public class Shop {
   }
 
   /**
-   * Создание списка товаров.
+   * Creating a product list.
    *
-   * @return список товаров
+   * @return item list.
    */
   private static List<Item> createItems() {
     List<Item> items = new ArrayList<>();
@@ -52,9 +52,9 @@ public class Shop {
   }
 
   /**
-   * Вывод приветственного сообщения магазина.
+   * Display store welcome message.
    *
-   * @param buratino главный герой
+   * @param buratino main character.
    */
   private static void displayWelcomeMessage(Buratino buratino) {
     System.out.println("Welcome to our store!");
@@ -63,9 +63,9 @@ public class Shop {
   }
 
   /**
-   * Вывод списка товаров в магазине.
+   * Display a list of products in the store.
    *
-   * @param items список товаров
+   * @param items item list.
    */
   private static void displayItems(List<Item> items) {
     for (int i = 0; i < items.size(); i++) {
@@ -80,10 +80,10 @@ public class Shop {
   }
 
   /**
-   * Покупка выбранного товара.
+   * Purchase of the selected item.
    *
-   * @param buratino главный герой
-   * @param item выбранный товар
+   * @param buratino main character.
+   * @param item selected item.
    */
   private static void buyItem(Buratino buratino, Item item) {
     if (buratino.getMoney() < item.getPrice()) {
