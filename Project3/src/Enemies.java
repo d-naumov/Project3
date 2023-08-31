@@ -6,6 +6,7 @@ public class Enemies {
 
     private int money;
 
+
     public Enemies(String name, int health, int strength, int money) {
         this.name = name;
         this.health = health;
@@ -30,20 +31,18 @@ public class Enemies {
     }
 
     /**
-     * Уменьшает количество здоровья игрока на указанное значение.
+     * Decreases the player's health by the specified amount.
      *
-     * @param amount количество здоровья для уменьшения
+     * @param amount the value of health to decrease
      */
     public void decreaseHealth(int amount) {
         health -= amount;
     }
     @Override
     public String toString() {
-        return "{" +
-                "name='" + name + '\'' +
-                ", health=" + health +
-                ", strength=" + strength +
-                ", money=" + money +
-                '}';
+        return name + '\'' +
+            "Health - " + health +
+            ", Strength - " + strength +
+            ", Money - " + money;
     }
 }
