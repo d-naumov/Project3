@@ -14,29 +14,38 @@ import org.junit.jupiter.api.Test;
 
 public class MainMenuTest {
 
-  private static final String TEST_FILE_NAME = "testSave.csv";
+  private static final String TEST_FILE_NAME = "res/testSave.csv";
 
 
   @Test
   public void testAddSaveToFile() throws IOException {
     // Создание фейкового объекта Buratino
-    Buratino buratino = new Buratino("Test Buratino", 100, 20, 10);
+    MainMenu.buratino = new Buratino("Test Buratino", 100, 20, 10);
 
     // Создание временного файла для теста
     File tempFile = new File(TEST_FILE_NAME);
+    tempFile.createNewFile();
 
     // Вызов метода addSaveToFile
-    // MainMenu.addSaveToFile("Test Save");
+    MainMenu.addSaveToFile("Test Buratino", TEST_FILE_NAME);
 
     // Проверка содержимого файла
-    BufferedReader reader = new BufferedReader(new FileReader(TEST_FILE_NAME));
-    String firstLine = reader.readLine();
+    BufferedReader bufferedReader = new BufferedReader(new FileReader(TEST_FILE_NAME));
+
+    String lastLine = bufferedReader.readLine();
+
+    //BufferedReader bufferedReader = new BufferedReader(new FileReader(TEST_FILE_NAME));
+    // String lastLine = bufferedReader.readLine();
+    String choicedLine;
+    while ((choicedLine = bufferedReader.readLine()) != null) {
+      lastLine = choicedLine;
+    }
 
     // Проверка, что строка в файле соответствует ожидаемой
-    assertEquals("Test Save,100,20,10", firstLine);
+    assertEquals("Test Buratino,100,20,10", lastLine);
 
     // Закрытие reader и удаление временного файла
-    reader.close();
+    bufferedReader.close();
     tempFile.delete();
   }
 
@@ -68,13 +77,13 @@ public class MainMenuTest {
   @Test
   public void testGetSaveToFile() throws IOException {
     // Создание временного файла с тестовыми данными
-    File tempFile = File.createTempFile("testSave", ".csv");
-    FileWriter writer = new FileWriter(tempFile);
-    writer.write("Buratino,100,50,30\n");
+    //File tempFile = new File(TEST_FILE_NAME);
+    FileWriter writer = new FileWriter(TEST_FILE_NAME);
+    writer.write("Buratino,180,22,10\n");
     writer.write("Alice,150,40,20\n");
     writer.close();
     // Вызов метода getSaveToFile
-    List<Buratino> loadedData = MainMenu.getSaveToFile(false);
+    List<Buratino> loadedData = MainMenu.getSaveToFile(false, TEST_FILE_NAME);
 
     // Проверка количества загруженных данных
     assertEquals(2, loadedData.size());
@@ -88,12 +97,15 @@ public class MainMenuTest {
 
     Buratino buratino2 = loadedData.get(1);
     assertEquals("Alice", buratino2.getName());
-    assertEquals(180, buratino2.getHealth());
-    assertEquals(22, buratino2.getStrength());
-    assertEquals(10, buratino2.getMoney());
+    assertEquals(150, buratino2.getHealth());
+    assertEquals(40, buratino2.getStrength());
+    assertEquals(20, buratino2.getMoney());
 
     // Удаление временного файла
-    tempFile.delete();
+
+    // tempFile.delete();
+
+
   }
 
 
