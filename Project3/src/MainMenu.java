@@ -117,10 +117,11 @@ public class MainMenu {
    * @param "saveName" the name of the game's saving.
    */
   public static void saveGame() {
+    Scanner saveGameScaner = new Scanner(System.in);
     String saveName;
     System.out.println("Save game as...");
     System.out.println("Indicate the name");
-    saveName = scanner.next();
+    saveName = saveGameScaner.next();
     addSaveToFile(saveName);
   }
 
