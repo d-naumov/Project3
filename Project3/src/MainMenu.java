@@ -40,7 +40,7 @@ public class MainMenu {
    */
   public static Buratino loadGame() {
     String LoadChose;
-    List<Buratino> allLoads = getSaveToFile(true);
+    List<Buratino> allLoads = getSaveToFile(true, "res/Save.csv");
     Scanner scanner1 = new Scanner(System.in);
     System.out.println("Name your saving");
     LoadChose = scanner1.next();
@@ -60,35 +60,39 @@ public class MainMenu {
    */
   public static Scanner scanner = new Scanner(System.in);
 
-  public static List<Buratino> getSaveToFile(boolean save) {
+  public static List<Buratino> getSaveToFile(boolean save, String path) {
     boolean saveNew = save;
     List<Buratino> allLoads = new ArrayList<>();
     String loadName;
     String LoadChose;
-    File inputFile = new File("res/Save.csv");
+
+    File inputFile = new File(path);
     try {
-      scanner = new Scanner(inputFile);
+      Scanner filiScanner = new Scanner(inputFile);
+      while (filiScanner.hasNextLine()) {
+        String line = filiScanner.nextLine();
+        String[] data = line.split(",");
+        loadName = data[0];
+        allLoads.add(new Buratino(data[0], Integer.parseInt(data[1]), Integer.parseInt(data[2]),
+            Integer.parseInt(data[3])));
+        if (saveNew) {
+          System.out.println(data[0]);
+        }
+      }
+      filiScanner.close();
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     }
-    while (scanner.hasNextLine()) {
-      String line = scanner.nextLine();
-      String[] data = line.split(",");
-      loadName = data[0];
-      allLoads.add(new Buratino(data[0], Integer.parseInt(data[1]), Integer.parseInt(data[2]),
-          Integer.parseInt(data[3])));
-      if (saveNew) {
-        System.out.println(data[0]);
-      }
-    }
+
     return allLoads;
   }
 
   /**
-   * Reads the information about the enemies from the file "Enemies.csv" and returns the list of the enemies.
+   * Reads the information about the enemies from the file "Enemies.csv" and returns the list of the
+   * enemies.
    *
    * @return List of the enemies, read from the file
-   * @throws RuntimeException  in case the error occures while reading from the file
+   * @throws RuntimeException in case the error occures while reading from the file
    */
   public static List<Enemies> getEnemiesFromFile() {
     File enemiesFile = new File("res/Enemies.csv");
@@ -117,12 +121,13 @@ public class MainMenu {
    * @param "saveName" the name of the game's saving.
    */
   public static void saveGame() {
+    String pathToFile = "res/Save.csv";
     Scanner saveGameScaner = new Scanner(System.in);
     String saveName;
     System.out.println("Save game as...");
     System.out.println("Indicate the name");
     saveName = saveGameScaner.next();
-    addSaveToFile(saveName);
+    addSaveToFile(saveName, pathToFile);
   }
 
   /**
@@ -130,15 +135,15 @@ public class MainMenu {
    *
    * @param "res/Save.csv" Name of the saving.
    */
-  public static void addSaveToFile(String name) {
-    List<Buratino> allSave = getSaveToFile(false);
-    Buratino buratinoSave;
-    buratinoSave = buratino;
+  public static void addSaveToFile(String name, String path) {
+    List<Buratino> allSave = getSaveToFile(false, "res/Save.csv");
+    Buratino buratinoSave = new Buratino(buratino.getName(), buratino.getHealth(),
+        buratino.getStrength(), buratino.getMoney());
     buratinoSave.setName(name);
     allSave.add(buratinoSave);
     try {
       PrintWriter writer;
-      writer = new PrintWriter("res/Save.csv");
+      writer = new PrintWriter(path);
       for (Buratino save : allSave) {
         writer.println(save.toStringFromFile());
       }
@@ -177,7 +182,7 @@ public class MainMenu {
       fight(index);
     } else {
       System.out.println("Incorrect input. Enter the number.");
-      scanner.nextLine(); // clear input buffer
+      scanner.nextLine();
     }
   }
 
@@ -186,7 +191,7 @@ public class MainMenu {
    *
    * @param choice chousen enemy for a battle
    */
-  private static void fight(int choice) {
+  static void fight(int choice) {
     List<Enemies> enemies = getEnemiesFromFile();
 
     if (choice < 1 || choice > enemies.size()) {
@@ -237,8 +242,8 @@ public class MainMenu {
   /**
    * Calculates the main characters attack.
    *
-   * @param buratinoStrength  the main character strength
-   * @param random object  for generation random numbers
+   * @param buratinoStrength the main character strength
+   * @param random           object  for generation random numbers
    * @return main character's attack value
    */
   private static int calculateBuratinoAttack(int buratinoStrength, Random random) {
@@ -257,7 +262,7 @@ public class MainMenu {
   }
 
   /**
-   * Performs attacks between the main character and the enemy..
+   * Performs attacks between the main character and the enemy.
    *
    * @param selectedEnemy  chosen enemy
    * @param buratinoAttack main character attack

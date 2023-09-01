@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -24,7 +25,7 @@ public class MainMenuTest {
 
     // Создание временного файла для теста
     File tempFile = new File(TEST_FILE_NAME);
-    tempFile.createNewFile();
+    assertTrue(tempFile.createNewFile());
 
     // Вызов метода addSaveToFile
     MainMenu.addSaveToFile("Test Buratino", TEST_FILE_NAME);
@@ -34,8 +35,6 @@ public class MainMenuTest {
 
     String lastLine = bufferedReader.readLine();
 
-    //BufferedReader bufferedReader = new BufferedReader(new FileReader(TEST_FILE_NAME));
-    // String lastLine = bufferedReader.readLine();
     String choicedLine;
     while ((choicedLine = bufferedReader.readLine()) != null) {
       lastLine = choicedLine;
@@ -46,9 +45,8 @@ public class MainMenuTest {
 
     // Закрытие reader и удаление временного файла
     bufferedReader.close();
-    tempFile.delete();
+    assertTrue(tempFile.delete());
   }
-
 
   @Test
   public void testLoadGame() {
@@ -77,7 +75,7 @@ public class MainMenuTest {
   @Test
   public void testGetSaveToFile() throws IOException {
     // Создание временного файла с тестовыми данными
-    //File tempFile = new File(TEST_FILE_NAME);
+    File tempFile = new File(TEST_FILE_NAME);
     FileWriter writer = new FileWriter(TEST_FILE_NAME);
     writer.write("Buratino,180,22,10\n");
     writer.write("Alice,150,40,20\n");
@@ -103,15 +101,14 @@ public class MainMenuTest {
 
     // Удаление временного файла
 
-    // tempFile.delete();
-
+    assertTrue(tempFile.delete());
 
   }
 
 
   @Test
   public void testEnemyToFightWithValidInput() {
-    Buratino buratino = new Buratino("Test Buratino", 100, 20, 10);
+    Buratino buratino = new Buratino("Test Buratino", 180, 20, 10);
     MainMenu.buratino = buratino;
     String input = "1\n";
     InputStream in = new ByteArrayInputStream(input.getBytes());
@@ -120,7 +117,6 @@ public class MainMenuTest {
     Scanner scanner = new Scanner(System.in);
 
     MainMenu.enemyToFight(scanner);
-
     // В данном случае, тест проверяет только на отсутствие исключений,
     // так как метод enemyToFight ничего не возвращает
   }
@@ -147,7 +143,7 @@ public class MainMenuTest {
     Scanner scanner = new Scanner(System.in);
 
     // Создаем объект Buratino для теста
-    Buratino buratino = new Buratino("Test Buratino", 100, 20, 10);
+    Buratino buratino = new Buratino("Test Buratino", 180, 20, 10);
     MainMenu.buratino = buratino;
 
     MainMenu.fight(1);
