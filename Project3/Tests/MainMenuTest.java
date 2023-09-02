@@ -40,32 +40,32 @@ public class MainMenuTest {
       lastLine = choicedLine;
     }
 
-    // Проверка, что строка в файле соответствует ожидаемой
+    // Checking if a line in a file is as expected
     assertEquals("Test Buratino,100,20,10", lastLine);
 
-    // Закрытие reader и удаление временного файла
+    // Closing the reader and deleting the temporary file
     bufferedReader.close();
     assertTrue(tempFile.delete());
   }
 
   @Test
   public void testLoadGame() {
-    // Создание фейкового списка allLoads
+    // Creating a fake List allLoads
     List<Buratino> allLoads = new ArrayList<>();
     allLoads.add(new Buratino("Buratino", 180, 22, 10));
     allLoads.add(new Buratino("Alice", 150, 40, 20));
 
-    // Мокирование System.in для предоставления входных данных
+    // Mocked System.in to supply input
     InputStream mockedInputStream = new ByteArrayInputStream("Buratino\n".getBytes());
     System.setIn(mockedInputStream);
 
-    // Вызов метода loadGame
+    // Calling loadGame method
     Buratino loadedBuratino = MainMenu.loadGame();
 
-    // Восстановление стандартного System.in
+    // Restoring the standard System.in
     System.setIn(System.in);
 
-    // Проверка, что метод вернул ожидаемый объект Buratino
+    // Checking that the method returned the expected Buratino object
     assertEquals("Buratino", loadedBuratino.getName());
     assertEquals(180, loadedBuratino.getHealth());
     assertEquals(22, loadedBuratino.getStrength());
@@ -74,19 +74,19 @@ public class MainMenuTest {
 
   @Test
   public void testGetSaveToFile() throws IOException {
-    // Создание временного файла с тестовыми данными
+    // Creating a temporary file with test data
     File tempFile = new File(TEST_FILE_NAME);
     FileWriter writer = new FileWriter(TEST_FILE_NAME);
     writer.write("Buratino,180,22,10\n");
     writer.write("Alice,150,40,20\n");
     writer.close();
-    // Вызов метода getSaveToFile
+    // Calling getSaveToFile method
     List<Buratino> loadedData = MainMenu.getSaveToFile(false, TEST_FILE_NAME);
 
-    // Проверка количества загруженных данных
+    // Checking the amount of data loaded
     assertEquals(2, loadedData.size());
 
-    // Проверка значений загруженных данных
+    // Validating Loaded Data Values
     Buratino buratino1 = loadedData.get(0);
     assertEquals("Buratino", buratino1.getName());
     assertEquals(180, buratino1.getHealth());
@@ -99,7 +99,7 @@ public class MainMenuTest {
     assertEquals(40, buratino2.getStrength());
     assertEquals(20, buratino2.getMoney());
 
-    // Удаление временного файла
+    // Deleting a temporary file
 
     assertTrue(tempFile.delete());
 
@@ -117,8 +117,8 @@ public class MainMenuTest {
     Scanner scanner = new Scanner(System.in);
 
     MainMenu.enemyToFight(scanner);
-    // В данном случае, тест проверяет только на отсутствие исключений,
-    // так как метод enemyToFight ничего не возвращает
+    // In this case, the test checks only for the absence of exceptions,
+    // since the enemyToFight method returns nothing
   }
 
   @Test
@@ -131,7 +131,7 @@ public class MainMenuTest {
 
     MainMenu.enemyToFight(scanner);
 
-    // Тест проверяет, что метод не вызывает исключение при некорректном вводе
+    // The test checks that the method does not throw an exception on invalid input.
   }
 
   @Test
@@ -142,29 +142,41 @@ public class MainMenuTest {
 
     Scanner scanner = new Scanner(System.in);
 
-    // Создаем объект Buratino для теста
+    // Create a Buratino object for the test
     Buratino buratino = new Buratino("Test Buratino", 180, 20, 10);
     MainMenu.buratino = buratino;
 
     MainMenu.fight(1);
 
-    // Тест проверяет, что метод fight выполняется без исключений
+    // The test checks that the fight method is executed without exceptions
   }
 
   @Test
   public void testFightWithInvalidChoice() {
-    String input = "10\n"; // Некорректный выбор
+    String input = "10\n"; // Incorrect input
     InputStream in = new ByteArrayInputStream(input.getBytes());
     System.setIn(in);
 
     Scanner scanner = new Scanner(System.in);
 
-    // Создаем объект Buratino для теста
+    // Create a Buratino object for the test
     Buratino buratino = new Buratino("Test Buratino", 100, 20, 10);
     MainMenu.buratino = buratino;
 
     MainMenu.fight(10);
 
-    // Тест проверяет, что метод fight обрабатывает некорректный выбор
+    // The test checks that the fight method handles an invalid choice
+  }
+
+  public static String readLastLine(String filePath) throws IOException {
+    String lastLine = null;
+
+    try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
+      String choicedLine;
+      while ((choicedLine = bufferedReader.readLine()) != null) {
+        lastLine = choicedLine;
+      }
+    }
+    return lastLine;
   }
 }
