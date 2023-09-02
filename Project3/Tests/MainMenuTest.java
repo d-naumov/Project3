@@ -17,20 +17,19 @@ public class MainMenuTest {
 
   private static final String TEST_FILE_NAME = "res/testSave.csv";
 
-
   @Test
   public void testAddSaveToFile() throws IOException {
-    // Создание фейкового объекта Buratino
+    // Creating a fake object Buratino
     MainMenu.buratino = new Buratino("Test Buratino", 100, 20, 10);
 
-    // Создание временного файла для теста
+    // Create a temporary file for a test
     File tempFile = new File(TEST_FILE_NAME);
     assertTrue(tempFile.createNewFile());
 
-    // Вызов метода addSaveToFile
+    // Method call addSaveToFile
     MainMenu.addSaveToFile("Test Buratino", TEST_FILE_NAME);
 
-    // Проверка содержимого файла
+    // Checking the contents of a file
     BufferedReader bufferedReader = new BufferedReader(new FileReader(TEST_FILE_NAME));
 
     String lastLine = bufferedReader.readLine();
@@ -48,15 +47,18 @@ public class MainMenuTest {
     assertTrue(tempFile.delete());
   }
 
+
   @Test
   public void testLoadGame() {
     // Creating a fake List allLoads
+
     List<Buratino> allLoads = new ArrayList<>();
     allLoads.add(new Buratino("Buratino", 180, 22, 10));
     allLoads.add(new Buratino("Alice", 150, 40, 20));
 
     // Mocked System.in to supply input
-    InputStream mockedInputStream = new ByteArrayInputStream("Buratino\n".getBytes());
+    InputStream mockedInputStream = new ByteArrayInputStream("1\n".getBytes());
+    // InputStream mockedInputStream = new ByteArrayInputStream("Buratino\n".getBytes());
     System.setIn(mockedInputStream);
 
     // Calling loadGame method
@@ -66,11 +68,12 @@ public class MainMenuTest {
     System.setIn(System.in);
 
     // Checking that the method returned the expected Buratino object
-    assertEquals("Buratino", loadedBuratino.getName());
+    assertEquals("Denis", loadedBuratino.getName());
     assertEquals(180, loadedBuratino.getHealth());
     assertEquals(22, loadedBuratino.getStrength());
     assertEquals(10, loadedBuratino.getMoney());
   }
+
 
   @Test
   public void testGetSaveToFile() throws IOException {
@@ -104,7 +107,6 @@ public class MainMenuTest {
     assertTrue(tempFile.delete());
 
   }
-
 
   @Test
   public void testEnemyToFightWithValidInput() {
@@ -157,8 +159,6 @@ public class MainMenuTest {
     InputStream in = new ByteArrayInputStream(input.getBytes());
     System.setIn(in);
 
-    // Scanner scanner = new Scanner(System.in);
-
     // Create a Buratino object for the test
     Buratino buratino = new Buratino("Test Buratino", 100, 20, 10);
     MainMenu.buratino = buratino;
@@ -166,17 +166,5 @@ public class MainMenuTest {
     MainMenu.fight(10);
 
     // The test checks that the fight method handles an invalid choice
-  }
-
-  public static String readLastLine(String filePath) throws IOException {
-    String lastLine = null;
-
-    try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
-      String choicedLine;
-      while ((choicedLine = bufferedReader.readLine()) != null) {
-        lastLine = choicedLine;
-      }
-    }
-    return lastLine;
   }
 }

@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -17,6 +18,7 @@ public class MainMenu {
    *
    * @param gameNew Flag of the new game
    */
+
   public static void checkMainHero(Boolean gameNew) {
     newGame = gameNew;
     buratino = newGame ? startNew() : loadGame();
@@ -33,12 +35,61 @@ public class MainMenu {
   }
 
   /**
-   * Загружает данные главного героя из файла сохранения. Loads the main heroes data from the saving
-   * file
+   * Loads the main heroes data from the saving file
    *
    * @return The object of the main character with the loaded data
    */
   public static Buratino loadGame() {
+    List<Buratino> allLoads = getSaveToFile(true, "res/Save.csv");
+    Scanner scanner1 = new Scanner(System.in);
+
+    if (allLoads.isEmpty()) {
+      System.out.println("No saved games found. Loading canceled.");
+      return null;
+    }
+
+    displaySavedGamesList(allLoads);
+
+    while (true) {
+      int choice = getValidGameChoice(scanner1, allLoads);
+
+      if (choice != -1) {
+        Buratino selectedGame = allLoads.get(choice - 1);
+        System.out.println("Loading game: " + selectedGame.getName());
+        return selectedGame;
+      }
+    }
+  }
+
+  private static void displaySavedGamesList(List<Buratino> allLoads) {
+    System.out.println("Select a saved game to load:");
+    for (int i = 0; i < allLoads.size(); i++) {
+      Buratino savedGame = allLoads.get(i);
+      System.out.println((i + 1) + ". " + savedGame.getName());
+    }
+  }
+
+  private static int getValidGameChoice(Scanner scanner, List<Buratino> allLoads) {
+    while (true) {
+      System.out.print("Enter the number of the saved game you want to load: ");
+
+      try {
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Считываем лишний перевод строки после ввода числа
+        if (choice >= 1 && choice <= allLoads.size()) {
+          return choice;
+        } else {
+          System.out.println("Invalid choice. Please enter a valid number.");
+        }
+      } catch (InputMismatchException e) {
+        System.out.println("Invalid input. Please enter a valid number.");
+        scanner.nextLine(); // Считываем некорректный ввод и продолжаем
+      }
+    }
+  }
+
+
+ /* public static Buratino loadGame() {
     String LoadChose;
     List<Buratino> allLoads = getSaveToFile(true, "res/Save.csv");
     Scanner scanner1 = new Scanner(System.in);
@@ -51,6 +102,8 @@ public class MainMenu {
     }
     return null;
   }
+
+  */
 
   /**
    * returns the list of loaded savings from the file.
@@ -76,7 +129,7 @@ public class MainMenu {
         allLoads.add(new Buratino(data[0], Integer.parseInt(data[1]), Integer.parseInt(data[2]),
             Integer.parseInt(data[3])));
         if (saveNew) {
-          System.out.println(data[0]);
+          // System.out.println(data[0]);
         }
       }
       filiScanner.close();
