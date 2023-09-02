@@ -121,12 +121,14 @@ public class MainMenu {
     return null;
   }
 */
-
   /**
-   * returns the list of loaded savings from the file.
+   * Reads and parses saved game data from a file and returns a list of Buratino objects
+   * representing the saved games.
    *
-   * @param save Flag indicating the necessity of saving.
-   * @return List of the loaded savings.
+   * @param save  A boolean indicating whether to save new data or not (not used within the
+   * method).
+   * @param path  The path to the file containing saved game data.
+   * @return A list of Buratino objects representing the saved games.
    */
   public static Scanner scanner = new Scanner(System.in);
 
