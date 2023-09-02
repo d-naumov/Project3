@@ -2,7 +2,7 @@
 
 # Buratino Adventures: An Exciting Text-Based Game
 
-![Buratino](buratino.jpg)
+![Buratino](C:\Users\Nutzer\Desktop\Git\Project3\img.png)
 
 Welcome to Buratino Adventures! This is a text-based adventure game where you take on the role of
 the main character, Buratino, and embark on a thrilling journey through the Land of Fools.
