@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public enum EnumShop {
   UNEXPECTED(""),
-  SELECTION("Выбор товара"),
-  EXIT("Выход");
+  SELECTION("Item selection"),
+  EXIT("Exit");
   private final String message;
 
   EnumShop(String message) {
@@ -18,9 +18,9 @@ public enum EnumShop {
 
   public static EnumShop readCommand(Scanner scanner) {
     printMenu();
-    System.out.println("Введите команду");
+    System.out.println("Enter command");
     if (!scanner.hasNext()) {
-      throw new RuntimeException("Ожидается ввод команды");
+      throw new RuntimeException("Waiting for a command");
     }
     String input = scanner.next();
     scanner.nextLine();
@@ -35,7 +35,7 @@ public enum EnumShop {
   }
 
   /**
-   * Метод выводит меню в консоль
+   * The method displays the menu in the console
    */
   public static void printMenu() {
     for (EnumShop shop : values()) {

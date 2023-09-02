@@ -4,15 +4,14 @@ import java.util.Scanner;
 
 public enum EnumMainMenu {
   UNEXPECTED(""),
-  FIGHTING("Сражение"),
-  SHOP("Магазин"),
-  INFORMATION("Информация о персонаже"),
-  SAVE("Сохранить игру"),
-  EXIT("Выход");
+  FIGHTING("Battle"),
+  SHOP("Store"),
+  INFORMATION("Character Info"),
+  EXIT("Exit");
   private final String message;
 
   /**
-   * Перечисление для главного меню с доступными опциями.
+   * An enumeration for the main menu with available options.
    */
   EnumMainMenu(String message) {
     this.message = message;
@@ -23,16 +22,16 @@ public enum EnumMainMenu {
   }
 
   /**
-   * Считывание команды из сканнера и преобразование в соответствующий EnumMainMenu.
+   * Read command from scanner and convert to appropriate EnumMainMenu.
    *
-   * @param scanner источник данных
-   * @return выбранная команда главного меню
+   * @param scanner data source
+   * @return selected main menu command
    */
   public static EnumMainMenu readCommand(Scanner scanner) {
     printMenu();
-    System.out.println("Введите команду");
+    System.out.println("Enter command");
     if (!scanner.hasNext()) {
-      throw new RuntimeException("Ожидается ввод команды");
+      throw new RuntimeException("Waiting for a command");
     }
     String input = scanner.next();
     scanner.nextLine();
@@ -44,8 +43,6 @@ public enum EnumMainMenu {
       case "3":
         return INFORMATION;
       case "4":
-        return SAVE;
-      case "5":
         return EXIT;
       default:
         return UNEXPECTED;
@@ -53,7 +50,7 @@ public enum EnumMainMenu {
   }
 
   /**
-   * Вывод меню главного меню в консоль.
+   * Displaying the main menu menu in the console.
    */
   public static void printMenu() {
     for (EnumMainMenu menu : values()) {
