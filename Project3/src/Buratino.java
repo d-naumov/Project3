@@ -78,9 +78,9 @@ public class Buratino {
     @Override
     public String toString() {
         return "Buratino:" +
-            " Health - " + health +
-            ", Strength - " + strength +
-            ", Money - " + money +
+            " Health " + health +
+            ", Strength " + strength +
+            ", Money " + money +
             ' ';
     }
 }

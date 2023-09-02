@@ -1,5 +1,4 @@
 import EnumPackage.EnumMainMenu;
-import EnumPackage.EnumShop;
 import java.util.Scanner;
 
 public class Main {
@@ -29,7 +28,6 @@ public class Main {
           loadGameMessage();
           MainMenu.checkMainHero(false);
           startMenu();
-          // Load game logic
         }
         case EXIT -> {
           return;
@@ -101,11 +99,9 @@ public class Main {
       switch (menu) {
         case FIGHTING -> MainMenu.enemiesInfo(scanner);
         case SHOP -> {
-          EnumShop.readCommand(scanner);
           Shop.selection(MainMenu.buratino, scanner);
         }
         case INFORMATION ->
-          //Надо добавить
                 System.out.println(MainMenu.buratino.toString());
         case SAVE -> {
           MainMenu.saveGame();

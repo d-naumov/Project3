@@ -140,7 +140,7 @@ public class MainMenuTest {
     InputStream in = new ByteArrayInputStream(input.getBytes());
     System.setIn(in);
 
-    Scanner scanner = new Scanner(System.in);
+    //Scanner scanner = new Scanner(System.in);
 
     // Create a Buratino object for the test
     Buratino buratino = new Buratino("Test Buratino", 180, 20, 10);
@@ -157,7 +157,7 @@ public class MainMenuTest {
     InputStream in = new ByteArrayInputStream(input.getBytes());
     System.setIn(in);
 
-    Scanner scanner = new Scanner(System.in);
+    // Scanner scanner = new Scanner(System.in);
 
     // Create a Buratino object for the test
     Buratino buratino = new Buratino("Test Buratino", 100, 20, 10);

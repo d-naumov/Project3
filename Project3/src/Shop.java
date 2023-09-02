@@ -31,7 +31,7 @@ public class Shop {
         System.out.println("Invalid choice. Exiting the shop.");
       }
     } else {
-      System.out.println("Invalid input. Exiting the shop.");
+      System.out.println("Invalid input.  Exiting the shop.");
       scanner.nextLine();
     }
   }
