@@ -121,9 +121,9 @@ public class MainMenu {
 
     File inputFile = new File(path);
     try {
-      Scanner filiScanner = new Scanner(inputFile);
-      while (filiScanner.hasNextLine()) {
-        String line = filiScanner.nextLine();
+      Scanner fileScanner = new Scanner(inputFile);
+      while (fileScanner.hasNextLine()) {
+        String line = fileScanner.nextLine();
         String[] data = line.split(",");
         loadName = data[0];
         allLoads.add(new Buratino(data[0], Integer.parseInt(data[1]), Integer.parseInt(data[2]),
@@ -132,7 +132,7 @@ public class MainMenu {
           // System.out.println(data[0]);
         }
       }
-      filiScanner.close();
+      fileScanner.close();
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     }

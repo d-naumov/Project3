@@ -2,6 +2,7 @@ import EnumPackage.EnumMainMenu;
 import java.util.Scanner;
 
 public class Main {
+
   public static final int NEW_GAME = 1;
   public static final int LOAD_GAME = 2;
   public static final int EXIT = 3;
@@ -60,7 +61,7 @@ public class Main {
       case "3":
         return EXIT;
       default:
-        return -1; // Represents UNEXPECTED
+        return -1;
     }
   }
 
@@ -101,8 +102,7 @@ public class Main {
         case SHOP -> {
           Shop.selection(MainMenu.buratino, scanner);
         }
-        case INFORMATION ->
-                System.out.println(MainMenu.buratino.toString());
+        case INFORMATION -> System.out.println(MainMenu.buratino.toString());
         case SAVE -> {
           MainMenu.saveGame();
         }
