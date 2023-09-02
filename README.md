@@ -43,11 +43,14 @@ To run this game, you will need:
 
 ## Authors
 
-- Name
+- Denis Kovtun
+- Dimitri Naumov
+- Natalja Röhm
+- Egor Danilov
 
 ## License
 
-This game is distributed under the MIT License. See [LICENSE.txt](LICENSE.txt) for details.
+This game is distributed under the MIT License. See [LICENSE](LICENSE.txt) for details.
 
 ---
 
