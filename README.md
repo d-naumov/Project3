@@ -12,7 +12,7 @@ the main character, Buratino, and embark on a thrilling journey through the Land
 In this game, you will:
 
 - Battle various enemies and emerge victorious.
-- Visit the shop and upgrade your character.
+- Visit the store and upgrade your character.
 - Collect gold and other resources.
 - Make decisions that impact the storyline.
 - And, of course, defeat the main antagonist, Karabas-Barabas.
@@ -22,12 +22,13 @@ In this game, you will:
 - MainMenu class where the general logic of the program takes place. 
  Where communication between classes takes place
 - The Main class performs the interaction of the console with the user of the game.
-- Class Buratino is an object representing a character with certain characteristics
+- Class Buratino is an object, representing a character with certain characteristics
 - Class Enemies, which is an object representing an enemy in our game.
 - Item class, which is a description of an item or commodity in the context of the game.
 - Shop class, which implements the functionality of the store in the game.
   In the project we implemented a set of test cases (unit-tests) for classes MainMenuTest and
-  ShopTest, which more accurately determines the work of individual methods and functions in the program.
+  ShopTest, which determines the work of individual methods and functions in the program more
+  accurately.
 
 ## Getting Started
 
