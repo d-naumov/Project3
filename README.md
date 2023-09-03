@@ -61,7 +61,7 @@ To run this game, you will need:
 
 ## License
 
-This game is distributed under the MIT License. See [LICENSE](LICENSE.txt) for details.
+This game is distributed under the MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
