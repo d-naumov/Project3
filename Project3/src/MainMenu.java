@@ -30,7 +30,7 @@ public class MainMenu {
    * @return the object of the new character
    */
   public static Buratino startNew() {
-    Buratino buratino = new Buratino("Buratino", 180, 22, 10);
+    Buratino buratino = new Buratino("Buratino", 50, 12, 0);
     return buratino;
   }
 
@@ -100,27 +100,6 @@ public class MainMenu {
       }
     }
   }
-
-///**
-// * Loads a saved game with a specified name from a file.
-// *
-// * @return The Buratino object representing the loaded game, or null if no game with the specified name is found.
-// */
-/*/
-  public static Buratino loadGame() {
-    String LoadChose;
-    List<Buratino> allLoads = getSaveToFile(true, "res/Save.csv");
-    Scanner scanner1 = new Scanner(System.in);
-    System.out.println("Name your saving");
-    LoadChose = scanner1.next();
-    for (int i = 0; i < allLoads.size(); i++) {
-      if (allLoads.get(i).getName().equalsIgnoreCase(LoadChose)) {
-        return allLoads.get(i);
-      }
-    }
-    return null;
-  }
-*/
   /**
    * Reads and parses saved game data from a file and returns a list of Buratino objects
    * representing the saved games.
@@ -369,8 +348,8 @@ public class MainMenu {
       displayKarabasVictoryMessage();
     } else {
       System.out.println("You defeated the enemy!");
-      buratino.increaseMoney(reward);
-      System.out.println("You received " + reward + " coins.");
+      buratino.increaseMoney( enemy.getMoney());
+      System.out.println("You received " + enemy.getMoney() + " coins.");
     }
   }
 

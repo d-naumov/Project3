@@ -44,9 +44,9 @@ public class Shop {
   private static List<Item> createItems() {
     List<Item> items = new ArrayList<>();
     items.add(new Item("Onion", 10, 20, 0));
-    items.add(new Item("ABC Book", 40, 0, 3));
-    items.add(new Item("Hand-Organ", 50, 50, 0));
-    items.add(new Item("Log", 100, 0, 10));
+    items.add(new Item("ABC Book", 15, 0, 7));
+    items.add(new Item("Hand-Organ", 35, 50, 0));
+    items.add(new Item("Log", 25, 0, 15));
     items.add(new Item("Golden Key", 10000, 100, 0));
     return items;
   }
