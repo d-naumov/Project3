@@ -58,7 +58,6 @@ public class ShopTest {
     assertEquals(10, buratino.getMoney());
   }
 
-
   @Test
   public void testInvalidInput() {
     Buratino buratino = new Buratino("Buratino", 100, 20, 50);

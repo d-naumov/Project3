@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
+
 public class MainMenuTest {
 
   private static final String TEST_FILE_NAME = "res/testSave.csv";
@@ -20,8 +21,8 @@ public class MainMenuTest {
   @Test
   public void testAddSaveToFile() throws IOException {
     // Creating a fake object Buratino
-    MainMenu.buratino = new Buratino("Test Buratino", 100, 20, 10);
-
+    Buratino buratino = new Buratino("Test Buratino", 100, 20, 10);
+    MainMenu.buratino = buratino;
     // Create a temporary file for a test
     File tempFile = new File(TEST_FILE_NAME);
     assertTrue(tempFile.createNewFile());
@@ -32,12 +33,7 @@ public class MainMenuTest {
     // Checking the contents of a file
     BufferedReader bufferedReader = new BufferedReader(new FileReader(TEST_FILE_NAME));
 
-    String lastLine = bufferedReader.readLine();
-
-    String choicedLine;
-    while ((choicedLine = bufferedReader.readLine()) != null) {
-      lastLine = choicedLine;
-    }
+    String lastLine = getLastLine(bufferedReader);
 
     // Checking if a line in a file is as expected
     assertEquals("Test Buratino,100,20,10", lastLine);
@@ -51,14 +47,10 @@ public class MainMenuTest {
   @Test
   public void testLoadGame() {
     // Creating a fake List allLoads
-
-    List<Buratino> allLoads = new ArrayList<>();
-    allLoads.add(new Buratino("Buratino", 180, 22, 10));
-    allLoads.add(new Buratino("Alice", 150, 40, 20));
+    List<Buratino> allLoads = createFakeSaveData();
 
     // Mocked System.in to supply input
     InputStream mockedInputStream = new ByteArrayInputStream("1\n".getBytes());
-    // InputStream mockedInputStream = new ByteArrayInputStream("Buratino\n".getBytes());
     System.setIn(mockedInputStream);
 
     // Calling loadGame method
@@ -74,15 +66,11 @@ public class MainMenuTest {
     assertEquals(10, loadedBuratino.getMoney());
   }
 
-
   @Test
   public void testGetSaveToFile() throws IOException {
     // Creating a temporary file with test data
-    File tempFile = new File(TEST_FILE_NAME);
-    FileWriter writer = new FileWriter(TEST_FILE_NAME);
-    writer.write("Buratino,180,22,10\n");
-    writer.write("Alice,150,40,20\n");
-    writer.close();
+    createTemporarySaveFile(TEST_FILE_NAME);
+
     // Calling getSaveToFile method
     List<Buratino> loadedData = MainMenu.getSaveToFile(false, TEST_FILE_NAME);
 
@@ -103,9 +91,7 @@ public class MainMenuTest {
     assertEquals(20, buratino2.getMoney());
 
     // Deleting a temporary file
-
-    assertTrue(tempFile.delete());
-
+    deleteTemporarySaveFile(TEST_FILE_NAME);
   }
 
   @Test
@@ -113,58 +99,96 @@ public class MainMenuTest {
     Buratino buratino = new Buratino("Test Buratino", 180, 20, 10);
     MainMenu.buratino = buratino;
     String input = "1\n";
-    InputStream in = new ByteArrayInputStream(input.getBytes());
-    System.setIn(in);
-
+    setInput(input);
     Scanner scanner = new Scanner(System.in);
-
-    MainMenu.enemyToFight(scanner);
     // In this case, the test checks only for the absence of exceptions,
     // since the enemyToFight method returns nothing
+    MainMenu.enemyToFight(scanner);
+
+    // Restoring System.in
+    restoreSystemIn();
   }
 
   @Test
   public void testEnemyToFightWithInvalidInput() {
     String input = "invalid\n";
-    InputStream in = new ByteArrayInputStream(input.getBytes());
-    System.setIn(in);
-
+    setInput(input);
     Scanner scanner = new Scanner(System.in);
-
+    // Testing for invalid user input
     MainMenu.enemyToFight(scanner);
 
-    // The test checks that the method does not throw an exception on invalid input.
+    // Checking that the method does not throw an exception on invalid input.
+    // Restoring System.in
+    restoreSystemIn();
   }
 
   @Test
   public void testFightWithValidChoice() {
     String input = "1\n";
-    InputStream in = new ByteArrayInputStream(input.getBytes());
-    System.setIn(in);
-
-    //Scanner scanner = new Scanner(System.in);
+    setInput(input);
 
     // Create a Buratino object for the test
     Buratino buratino = new Buratino("Test Buratino", 180, 20, 10);
     MainMenu.buratino = buratino;
 
+    // The test checks that the fight method is executed without exceptions
     MainMenu.fight(1);
 
-    // The test checks that the fight method is executed without exceptions
+    // Restoring System.in
+    restoreSystemIn();
   }
 
   @Test
   public void testFightWithInvalidChoice() {
     String input = "10\n"; // Incorrect input
-    InputStream in = new ByteArrayInputStream(input.getBytes());
-    System.setIn(in);
+    setInput(input);
 
     // Create a Buratino object for the test
     Buratino buratino = new Buratino("Test Buratino", 100, 20, 10);
     MainMenu.buratino = buratino;
 
+    // The test checks that the fight method handles an invalid choice
     MainMenu.fight(10);
 
-    // The test checks that the fight method handles an invalid choice
+    // Restoring System.in
+    restoreSystemIn();
+  }
+
+  private void setInput(String input) {
+    InputStream in = new ByteArrayInputStream(input.getBytes());
+    System.setIn(in);
+  }
+
+  private void restoreSystemIn() {
+    System.setIn(System.in);
+  }
+
+  private List<Buratino> createFakeSaveData() {
+    List<Buratino> allLoads = new ArrayList<>();
+    allLoads.add(new Buratino("Buratino", 180, 22, 10));
+    allLoads.add(new Buratino("Alice", 150, 40, 20));
+    return allLoads;
+  }
+
+  private String getLastLine(BufferedReader reader) throws IOException {
+    String lastLine = null;
+    String choicedLine;
+    while ((choicedLine = reader.readLine()) != null) {
+      lastLine = choicedLine;
+    }
+    return lastLine;
+  }
+
+  private void createTemporarySaveFile(String fileName) throws IOException {
+    File tempFile = new File(fileName);
+    FileWriter writer = new FileWriter(fileName);
+    writer.write("Buratino,180,22,10\n");
+    writer.write("Alice,150,40,20\n");
+    writer.close();
+  }
+
+  private void deleteTemporarySaveFile(String fileName) {
+    File tempFile = new File(fileName);
+    tempFile.delete();
   }
 }
